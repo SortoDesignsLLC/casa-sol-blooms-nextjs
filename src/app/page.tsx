@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { sharedOpenGraph } from "@/lib/metadata";
 export const metadata: Metadata = {
   "title": "Casa Sol — Luxury Matcha & Coffee Cart for DMV Events",
   "description": "Casa Sol is a boutique matcha and cold brew cart serving weddings, showers, birthdays and pop-ups across the DMV. Request your date today.",
   "openGraph": {
+    ...sharedOpenGraph,
     "title": "Casa Sol — Luxury Matcha & Coffee Cart for DMV Events",
     "description": "Casa Sol is a boutique matcha and cold brew cart serving weddings, showers, birthdays and pop-ups across the DMV. Request your date today."
   }
