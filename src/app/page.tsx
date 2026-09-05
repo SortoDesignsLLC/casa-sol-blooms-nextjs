@@ -25,7 +25,7 @@ import {
   Flower2,
   IceCreamCone,
 } from "lucide-react";
-const logo = "/images/casa-sol-logo-full.jpg";
+const logo = "/images/casa-sol-logo-transparent.png";
 const hero = "/images/hero.jpg";
 const photoPour = "/images/IMG_3549.jpg";
 const photoSunshine = "/images/IMG_3550.jpg";
@@ -179,7 +179,7 @@ export default function Home() {
             alt="Casa Sol Matcha & Coffee"
             width={420}
             height={110}
-            className="mx-auto h-40 w-auto mix-blend-multiply sm:h-56"
+            className="mx-auto h-40 w-auto sm:h-56"
           />
           <h1 className="mt-7 text-4xl leading-tight sm:text-6xl">
             A matcha &amp; coffee cart made for your celebration

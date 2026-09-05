@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Heart, Mail, Phone } from "lucide-react";
-const logo = "/images/casa-sol-logo-full.jpg";
+const logo = "/images/casa-sol-logo-transparent.png";
 
 export function SiteFooter() {
   return (
@@ -11,7 +11,7 @@ export function SiteFooter() {
           alt="Casa Sol Matcha & Coffee"
           width={348}
           height={212}
-          className="mx-auto h-28 w-auto mix-blend-multiply sm:h-36"
+          className="mx-auto h-28 w-auto sm:h-36"
         />
         <p className="eyebrow mt-3">Matcha &amp; Coffee · DMV Area</p>
 

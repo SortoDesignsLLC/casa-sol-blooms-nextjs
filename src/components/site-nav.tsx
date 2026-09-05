@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Heart } from "lucide-react";
-const logo = "/images/casa-sol-logo-full.jpg";
+const logo = "/images/casa-sol-logo-transparent.png";
 
 const links = [
   { to: "/", label: "Home" },
@@ -23,7 +23,7 @@ export function SiteNav() {
           <img
             src={logo}
             alt="Casa Sol Matcha & Coffee"
-            className="h-14 w-auto mix-blend-multiply sm:h-16"
+            className="h-14 w-auto sm:h-16"
             width={220}
             height={60}
           />
