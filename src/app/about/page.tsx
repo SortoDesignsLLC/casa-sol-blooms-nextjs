@@ -1,3 +1,5 @@
+import { SolMotion } from "@/components/sol-motion";
+import { SolBackground } from "@/components/sol-background";
 import type { Metadata } from "next";
 import { sharedOpenGraph } from "@/lib/metadata";
 export const metadata: Metadata = {
@@ -18,14 +20,14 @@ const founderPhoto = "/images/casa-sol-founder.png";
 
 export default function AboutPage() {
   return (
-    <div className="overflow-x-hidden">
-      <section className="bg-surface-cream py-16 text-center">
+    <SolMotion className="sol-subpage">
+      <section className="sol-page-header relative isolate bg-surface-cream py-16 text-center"><SolBackground />
         <p className="eyebrow">Nuestra Casa</p>
         <h1 className="mt-3 text-4xl sm:text-5xl">About Casa Sol</h1>
         <div className="gold-rule mx-auto mt-5" />
       </section>
 
-      <div className="bg-surface-sand py-16">
+      <div className="sol-page-panel sol-page-about bg-surface-sand py-16"><SolBackground variant="garden" />
       <div className="mx-auto grid max-w-5xl items-center gap-10 px-5 md:grid-cols-2">
         <img
           src={founderPhoto}
@@ -33,7 +35,7 @@ export default function AboutPage() {
           loading="lazy"
           width={1200}
           height={1408}
-          className="w-full max-h-[36rem] rounded-[1.75rem] object-contain bg-surface-cream shadow-luxe"
+          className="sol-founder-frame w-full max-h-[36rem] rounded-[1.75rem] object-contain bg-surface-cream shadow-luxe"
         />
         <div className="space-y-5 text-muted-foreground">
           <p>
@@ -54,7 +56,7 @@ export default function AboutPage() {
           <p className="font-script text-3xl text-primary">Gracias for being here</p>
           <Link
             href="/book"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm tracking-wide text-primary-foreground transition-opacity hover:opacity-90"
+            className="sol-button"
           >
             <Heart size={14} fill="currentColor" /> Book Casa Sol
           </Link>
@@ -62,6 +64,6 @@ export default function AboutPage() {
       </div>
 
       </div>
-    </div>
+    </SolMotion>
   );
 }

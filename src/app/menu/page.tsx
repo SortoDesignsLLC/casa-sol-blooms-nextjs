@@ -1,3 +1,5 @@
+import { SolMotion } from "@/components/sol-motion";
+import { SolBackground, SolWave } from "@/components/sol-background";
 import type { Metadata } from "next";
 import { sharedOpenGraph } from "@/lib/metadata";
 export const metadata: Metadata = {
@@ -10,13 +12,12 @@ export const metadata: Metadata = {
   }
 };
 import Link from "next/link";
-import { Leaf, Coffee, Sparkles, Cherry, Citrus, Sun, CupSoda, Flower2 } from "lucide-react";
+import { Leaf, Coffee, Cherry, Citrus, Sun, CupSoda, Flower2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 const photoMatcha = "/images/IMG_3547.jpg";
 const photoPour = "/images/IMG_3549.jpg";
 const photoMenu = "/images/IMG_3546.jpg";
 const photoFoam = "/images/IMG_3545.jpg";
-import { SectionDecor } from "@/components/section-decor";
 import { menu, seasonal } from "@/data/menu";
 
 
@@ -31,9 +32,9 @@ const drinkIcons: Record<string, LucideIcon> = {
 
 export default function MenuPage() {
   return (
-    <div className="overflow-x-hidden">
-      <section className="relative isolate bg-surface-cream py-16 text-center">
-        <SectionDecor variant="c" />
+    <SolMotion className="sol-subpage">
+      <section className="sol-page-header relative isolate bg-surface-cream py-16 text-center">
+        <SolBackground variant="coffee" />
         <div className="mx-auto max-w-5xl px-5">
           <p className="eyebrow">Sip Sip Hooray</p>
           <h1 className="mt-3 text-4xl sm:text-5xl">Our Menu</h1>
@@ -44,7 +45,7 @@ export default function MenuPage() {
         </div>
       </section>
 
-      <div className="bg-surface-sage py-16">
+      <div className="sol-page-menu sol-page-panel bg-surface-sage py-16"><SolWave /><SolBackground variant="coffee" />
       <div className="mx-auto grid max-w-5xl gap-8 px-5 md:grid-cols-2">
         {menu.map((section) => (
           <section
@@ -90,7 +91,7 @@ export default function MenuPage() {
 
       </div>
 
-      <div className="bg-surface-sand py-16">
+      <div className="sol-page-panel sol-page-gallery bg-surface-sand py-16"><SolBackground variant="garden" />
       <div className="mx-auto grid max-w-5xl gap-4 px-5 sm:grid-cols-2">
         <img
           src={photoMatcha}
@@ -120,9 +121,8 @@ export default function MenuPage() {
 
       </div>
 
-      <section className="bg-surface-blush py-20 text-center">
+      <section className="sol-page-panel sol-page-special bg-surface-blush py-20 text-center"><SolWave /><SolBackground />
       <div className="mx-auto max-w-3xl px-5">
-        <Sparkles size={22} className="mx-auto text-primary" />
         <h2 className="mt-3 text-2xl">Seasonal &amp; Specialty</h2>
         <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
           We rotate limited flavors throughout the year — and we love creating a custom drink named
@@ -143,12 +143,12 @@ export default function MenuPage() {
         )}
         <Link
           href="/book"
-          className="mt-7 inline-flex rounded-full bg-primary px-7 py-3 text-sm tracking-wide text-primary-foreground transition-opacity hover:opacity-90"
+          className="sol-button mt-7"
         >
           Book Casa Sol
         </Link>
       </div>
       </section>
-    </div>
+    </SolMotion>
   );
 }

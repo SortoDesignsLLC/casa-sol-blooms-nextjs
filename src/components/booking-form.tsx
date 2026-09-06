@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
+import { SolMotion } from "@/components/sol-motion";
+import { SolBackground } from "@/components/sol-background";
 import { z } from "zod";
 import { toast } from "sonner";
-import { CalendarHeart, MapPin, Users, Sparkles, Heart, Mail, Phone } from "lucide-react";
+import { CalendarHeart, MapPin, Users, Coffee, Heart, Mail, Phone } from "lucide-react";
 
 
 
@@ -22,7 +24,7 @@ const schema = z.object({
 
 const steps = [
   {
-    icon: Sparkles,
+    icon: Coffee,
     title: "Pick your vibe",
     text: "Tell us your date, your drinks and how many sips you need.",
   },
@@ -84,9 +86,10 @@ export default function BookPage() {
   }
 
   return (
-    <div className="bg-surface-cream">
+    <SolMotion className="sol-subpage sol-book-page">
+      <div className="sol-book-backdrop"><SolBackground /><SolBackground variant="garden" /></div>
       <div className="mx-auto max-w-3xl px-5 py-16">
-      <div className="text-center">
+      <div className="sol-book-heading text-center">
         <p className="eyebrow">Let&apos;s Celebrate</p>
         <h1 className="mt-3 text-4xl sm:text-5xl">Book Casa Sol</h1>
         <p className="font-script mt-2 text-3xl text-primary">for your next event</p>
@@ -96,20 +99,27 @@ export default function BookPage() {
         </p>
       </div>
 
-      <ol className="mt-12 grid gap-5 sm:grid-cols-3">
+      <ol className="sol-book-steps mt-12 grid gap-5 sm:grid-cols-3">
         {steps.map((s, i) => (
           <li
             key={s.title}
-            className="rounded-[1.75rem] border border-border/70 bg-card p-6 text-center shadow-luxe"
+            className="sol-step-cloud text-center"
           >
-            <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-accent">
-              <s.icon size={24} className="text-primary" />
-            </div>
+            {i < steps.length - 1 && <svg className="sol-cloud-route" viewBox="0 0 140 150" fill="none" aria-hidden="true">
+              <path d="M8 86 C30 90 26 37 62 43 C105 50 94 111 68 94 C44 77 91 24 132 64" />
+            </svg>}
+            <svg className="sol-cloud-shape" viewBox="0 0 320 320" preserveAspectRatio="none" aria-hidden="true">
+              <path className="sol-cloud-fill" d="M48 101 C19 94 6 123 19 147 C-2 170 10 207 35 211 C23 244 46 270 77 264 C89 298 125 303 148 284 C171 307 210 299 221 277 C250 289 281 271 281 243 C311 235 323 206 304 181 C325 156 311 125 288 120 C298 88 275 64 245 71 C236 36 201 24 176 46 C153 17 112 26 102 57 C73 43 43 67 48 101 Z" />
+              <path className="sol-cloud-pencil" d="M45 105 C17 100 11 125 24 146 M40 215 C31 242 49 263 77 257 M106 57 C120 32 149 30 174 50 M223 273 C249 283 275 266 276 244 M286 124 C308 133 313 156 300 177" />
+            </svg>
+            <div className="sol-cloud-content">
+            <div className="sol-cloud-icon"><s.icon size={23} /></div>
             <p className="eyebrow mt-4">Step {i + 1}</p>
             <h2 className="mt-1 text-xl">{s.title}</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               {s.text.replace("&amp;", "&")}
             </p>
+            </div>
           </li>
         ))}
       </ol>
@@ -176,7 +186,7 @@ export default function BookPage() {
 
         <button
           type="submit"
-          className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm tracking-wide text-primary-foreground transition-opacity hover:opacity-90"
+          className="sol-button mt-8 w-full"
         >
           <CalendarHeart size={16} /> Send my inquiry
         </button>
@@ -209,7 +219,7 @@ export default function BookPage() {
         </a>
       </div>
       </div>
-    </div>
+    </SolMotion>
   );
 }
 
