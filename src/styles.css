@@ -514,7 +514,7 @@ nav a[aria-current="page"] { color: var(--primary); }
   .casa-home figcaption { font-size: 20px; }
   .sol-menu-list { padding: 25px; }
   .sol-story h2 { font-size: 40px; }
-  .sol-story-bottom { padding-left: 0; }
+  .sol-story-bottom { padding-left: 0; gap: 35px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .casa-home *, .casa-home *::before { animation: none !important; transition: none !important; }
@@ -693,5 +693,27 @@ nav a[aria-current="page"] { color: var(--primary); }
   box-shadow: none;
 }
 @media (max-width: 700px) {
-  .sol-story-bottom img.sol-story-logo { width: 185px; margin-bottom: 24px; }
+  .sol-story-bottom img.sol-story-logo { width: 125px; max-width: 40%; margin: 0 0 18px; }
+}
+
+@media (min-width: 1024px) {
+  .sol-story-bottom img.sol-story-logo {
+    width: 325px;
+    max-width: 80%;
+    margin-top: -90px;
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sol-story-bottom figure {
+    width: 94%;
+    margin: 12px auto 0;
+  }
+  .sol-story-bottom figure img {
+    height: auto;
+    aspect-ratio: 1 / 1.08;
+    object-fit: cover;
+    object-position: center 30%;
+  }
 }
