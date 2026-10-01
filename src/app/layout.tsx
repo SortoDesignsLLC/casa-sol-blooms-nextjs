@@ -4,13 +4,14 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "@/components/toaster";
 import "@/styles.css";
+import "@/experience.css";
 export const viewport: Viewport = { themeColor: "#fbf6eb" };
 export const metadata: Metadata = {
   metadataBase,
   applicationName: "Casa Sol",
   openGraph: sharedOpenGraph,
-  title: "Casa Sol — Matcha & Coffee Cart",
-  description: "Handcrafted matcha and cold brew for celebrations across the DMV.",
+  title: "Casa Sol — Mobile Beverage Experience",
+  description: "Handcrafted matcha, cold brew, and mocktails for celebrations, brands, and gatherings across the DMV. Beverage catering and fresh drink delivery.",
   authors: [{ name: "Casa Sol" }],
   icons: {
     icon: [

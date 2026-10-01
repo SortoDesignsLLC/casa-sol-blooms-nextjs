@@ -450,28 +450,38 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-story .sol-wave { color: var(--surface-blush); }
 .sol-background { position: absolute; inset: 0; overflow: hidden; z-index: -1; pointer-events: none; color: var(--blush); }
 .sol-background > svg { position: absolute; }
-.sol-bg-sun { width: 340px; left: -190px; top: -85px; opacity: .3; }
-.sol-bg-sprig { height: 265px; right: -20px; bottom: 5px; color: var(--sage); opacity: .22; transform-origin: bottom center; }
-.sol-bg-cup { width: 105px; left: 43%; bottom: 32px; opacity: .27; transform: rotate(-16deg); }
-.sol-bg-trail { width: 650px; left: -130px; bottom: 25px; opacity: .2; }
-.sol-bg-spark { width: 22px; opacity: .5; }
-.sol-bg-spark-0 { left: 42%; top: 10%; }
-.sol-bg-spark-1 { left: 4%; top: 55%; width: 16px; }
-.sol-bg-spark-2 { right: 3%; top: 25%; width: 30px; }
-.sol-background-garden .sol-bg-sun, .sol-background-garden .sol-bg-cup { display: none; }
-.sol-background-garden .sol-bg-sprig { right: -30px; bottom: 20px; height: 380px; }
-.sol-background-garden .sol-bg-trail { bottom: auto; top: 70px; left: -170px; transform: rotate(-20deg); }
-.sol-background-coffee .sol-bg-cup { left: 36%; bottom: 60px; width: 130px; color: var(--sage); }
-.sol-background-coffee .sol-bg-sun { left: auto; right: -140px; top: auto; bottom: -120px; color: var(--sage); }
-.sol-background-coffee .sol-bg-sprig { display: none; }
-.sol-turn { transform-origin: 120px 120px; animation: sol-sun-turn 45s linear infinite; }
-.sol-hero-sun, .sol-menu-sun, .sol-finale-sun { animation: sol-sun-turn 50s linear infinite; }
-.sol-bg-sprig { animation: sol-sway 7s ease-in-out infinite alternate; }
-.sol-bg-cup { animation: sol-bob 6s ease-in-out infinite alternate; }
-.sol-bg-spark { animation: sol-twinkle 4s ease-in-out infinite alternate; }
-.sol-bg-spark-1 { animation-delay: -2s; }
-.sol-bg-spark-2 { animation-delay: -3s; }
-.sol-bg-trail path { stroke-dasharray: 1; animation: sol-draw 3s ease-out both; }
+/* Engraved sun and botanical studies, animated as a quiet living border. */
+.sol-medallion { height: auto; }
+.sol-sun-mobile-detail { display: none; }
+.sol-margin-sun { width: 290px; left: -120px; top: -85px; color: var(--blush); opacity: .48; }
+.sol-margin-branch { width: 245px; right: -77px; bottom: -40px; color: var(--sage); opacity: .31; }
+.sol-margin-contour { width: 520px; left: -135px; bottom: -5px; color: var(--sage); opacity: .22; }
+.sol-background-garden .sol-margin-sun { display: none; }
+.sol-background-garden .sol-margin-branch { width: 280px; right: -95px; }
+.sol-margin-branch-secondary { left: -105px; right: auto; top: -100px; transform: rotate(155deg); }
+.sol-background-coffee .sol-margin-sun { left: auto; right: -130px; top: -115px; color: var(--gold); }
+.sol-background-coffee .sol-margin-branch { right: -70px; bottom: -65px; color: var(--foreground); }
+.sol-background-coffee .sol-margin-contour { color: var(--gold); }
+.sol-hero-sun, .sol-menu-sun, .sol-finale-sun { animation: none; }
+.sol-engraved-rays { transform-origin: 120px 120px; animation: sol-sun-turn 120s linear infinite; }
+.sol-botanical-stem { transform-origin: 115px 325px; animation: sol-botanical-breathe 11s ease-in-out infinite alternate; }
+.sol-margin-branch-secondary .sol-botanical-stem { animation-delay: -5s; }
+@keyframes sol-botanical-breathe { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+@media (max-width: 700px) {
+  .sol-sun-desktop-detail { display: none; }
+  .sol-sun-mobile-detail { display: inline; }
+  .sol-leaf-veins:last-child { display: none; }
+  .sol-margin-sun { width: 112px; left: -27px; top: 16px; opacity: .42; }
+  .sol-margin-branch, .sol-background-garden .sol-margin-branch { width: 86px; right: -8px; bottom: 24px; opacity: .35; }
+  .sol-margin-branch-secondary { display: none; }
+  .sol-background-coffee .sol-margin-branch { right: 2px; bottom: 12px; width: 70px; }
+  .sol-background-coffee .sol-margin-sun { width: 66px; right: 16px; top: -4px; opacity: .65; }
+  .sol-margin-contour { display: none; }
+  .sol-hero > .sol-background .sol-margin-branch { bottom: 62px; }
+  .sol-hero-sun { width: 68px; left: -15px; top: 8px; padding: 5px; transform: rotate(-12deg); }
+  .sol-story > .sol-background .sol-margin-branch { bottom: 10px; width: 62px; }
+  .sol-finale > .sol-background .sol-margin-sun { display: none; }
+}
 .sol-motion-control { padding: 18px; background: var(--sand); text-align: center; }
 .sol-motion-control button { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; padding: 9px 14px; border: 1px solid var(--border); border-radius: 30px; cursor: pointer; }
 .casa-home[data-motion-paused="true"] *, .casa-home[data-motion-paused="true"] *::before { animation-play-state: paused !important; }
@@ -503,12 +513,6 @@ nav a[aria-current="page"] { color: var(--primary); }
   .sol-hero-photo img { object-fit: cover; object-position: center 18%; }
   .sol-photo-note { font-size: 22px; padding-top: 9px; }
   .sol-hero-sun { width: 68px; }
-  .sol-bg-sun { width: 250px; left: -155px; top: 0; }
-  .sol-bg-cup { left: 2%; bottom: 90px; width: 70px; }
-  .sol-bg-sprig { height: 180px; right: -40px; }
-  .sol-bg-spark-0 { left: 85%; top: 16%; }
-  .sol-background-garden .sol-bg-sprig { height: 260px; }
-  .sol-background-coffee .sol-bg-cup { left: auto; right: 10px; top: 10px; width: 80px; }
   .sol-gather-heading .sol-label { font-size: 24px; }
   .sol-wide-photo img { height: 370px; }
   .casa-home figcaption { font-size: 20px; }
@@ -528,11 +532,7 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-page-header h1, .sol-book-heading h1 { font-size: clamp(44px, 5vw, 66px); }
 .sol-page-header > div:not(.sol-background), .sol-book-heading { animation: sol-arrive 800ms ease both; }
 .sol-page-panel { position: relative; isolation: isolate; }
-.sol-page-header .sol-bg-cup { left: 78%; bottom: 30px; }
-.sol-page-header .sol-bg-trail { left: -180px; }
 .sol-page-menu .sol-wave { color: var(--surface-sage); }
-.sol-page-menu .sol-bg-cup { left: 1%; width: 100px; }
-.sol-page-menu .sol-bg-sprig { right: 0; }
 .sol-page-menu section { border-radius: 38px 38px 25px 25px; border-top: 4px solid var(--blush-soft); transition: transform 300ms, box-shadow 300ms; }
 .sol-page-menu section:hover { transform: translateY(-5px); }
 .sol-page-menu section .font-display { color: var(--accent-foreground); }
@@ -551,10 +551,6 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-book-backdrop { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .sol-book-backdrop > .sol-background:first-child { height: 600px; }
 .sol-book-backdrop > .sol-background-garden { top: 540px; }
-.sol-book-backdrop .sol-bg-cup { left: auto; right: 4%; bottom: 70px; width: 130px; }
-.sol-book-backdrop .sol-bg-sun { width: 390px; left: -180px; }
-.sol-book-backdrop .sol-bg-trail { top: 320px; left: -220px; }
-.sol-book-backdrop .sol-bg-sprig { height: 450px; }
 .sol-book-steps h2 { font-size: 23px; }
 .sol-book-steps > li { border-top: 4px solid var(--blush-soft); transition: transform 300ms; }
 .sol-book-steps > li:nth-child(2) { border-top-color: var(--sage-soft); }
@@ -566,17 +562,12 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-subpage .sol-motion-control { background: var(--surface-blush); }
 @media (max-width: 700px) {
   .sol-page-header { padding-block: 45px 65px; }
-  .sol-page-header .sol-bg-cup { left: auto; right: -15px; bottom: 2px; width: 70px; }
-  .sol-page-header .sol-bg-spark-0 { top: 8%; }
   .sol-page-gallery img { height: 280px; }
   .sol-page-gallery { padding-block: 45px 75px; }
   .sol-page-about { padding-block: 45px; }
   .sol-page-about .space-y-5 { padding: 24px; }
   .sol-founder-frame { width: 90%; margin-inline: auto; }
   .sol-book-steps { gap: 15px; }
-  .sol-book-backdrop .sol-bg-sun { width: 260px; left: -190px; }
-  .sol-book-backdrop .sol-bg-cup { right: -20px; width: 80px; }
-  .sol-book-backdrop .sol-bg-sprig { height: 260px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .sol-subpage *, .sol-subpage *::before { animation: none !important; transition: none !important; }

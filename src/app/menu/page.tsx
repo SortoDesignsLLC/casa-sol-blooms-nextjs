@@ -1,154 +1,35 @@
-import { SolMotion } from "@/components/sol-motion";
-import { SolBackground, SolWave } from "@/components/sol-background";
 import type { Metadata } from "next";
-import { sharedOpenGraph } from "@/lib/metadata";
-export const metadata: Metadata = {
-  "title": "Menu — Casa Sol Matcha & Coffee",
-  "description": "Our matcha and cold brew menu: Fresa Fresca, Garden Glow, Tropical Bloom and Nube de Caramelo, plus seasonal flavors.",
-  "openGraph": {
-    ...sharedOpenGraph,
-    "title": "Menu — Casa Sol Matcha & Coffee",
-    "description": "Our matcha and cold brew menu: Fresa Fresca, Garden Glow, Tropical Bloom and Nube de Caramelo, plus seasonal flavors."
-  }
-};
 import Link from "next/link";
-import { Leaf, Coffee, Cherry, Citrus, Sun, CupSoda, Flower2 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-const photoMatcha = "/images/IMG_3547.jpg";
-const photoPour = "/images/IMG_3549.jpg";
-const photoMenu = "/images/IMG_3546.jpg";
-const photoFoam = "/images/IMG_3545.jpg";
+import { ArrowRight } from "lucide-react";
+import { SolMotion } from "@/components/sol-motion";
+import { sharedOpenGraph } from "@/lib/metadata";
+import { DrinkIllustration } from "@/components/sol-illustrations";
+import { SeasonalFeature } from "@/components/seasonal-feature";
 import { menu, seasonal } from "@/data/menu";
 
-
-
-// A different little icon for every drink.
-const drinkIcons: Record<string, LucideIcon> = {
-  "Fresa Fresca": Cherry,
-  "Garden Glow": Citrus,
-  "Tropical Bloom": Flower2,
-  "Nube de Caramelo": CupSoda,
+const description = "Explore Casa Sol’s handcrafted matcha, Salvadoran cold brew, fruit mocktails, and fall seasonal flavors. Made with house-made purées and cold foams.";
+export const metadata: Metadata = {
+  title: "Our Menu — Casa Sol Matcha & Coffee", description,
+  openGraph: { ...sharedOpenGraph, title: "Our Menu — Casa Sol Matcha & Coffee", description },
 };
+const categoryNotes = ["Earthy, creamy, a little bright.", "Salvadoran roots. Cloud-soft finish.", "All the celebration. Zero alcohol."];
 
 export default function MenuPage() {
-  return (
-    <SolMotion className="sol-subpage">
-      <section className="sol-page-header relative isolate bg-surface-cream py-16 text-center">
-        <SolBackground variant="coffee" />
-        <div className="mx-auto max-w-5xl px-5">
-          <p className="eyebrow">Sip Sip Hooray</p>
-          <h1 className="mt-3 text-4xl sm:text-5xl">Our Menu</h1>
-          <div className="gold-rule mx-auto mt-5" />
-          <p className="mx-auto mt-5 max-w-md text-muted-foreground">
-            Small batch, made fresh at your event. All matcha is made with oat milk.
-          </p>
+  return <SolMotion className="sol-subpage sol-menu-page">
+    <nav aria-label="Menu categories" className="sol-menu-navigation"><div className="sol-wrap"><p className="sol-label">Made by hand. Picked by you.</p><div className="sol-menu-jump">
+      {seasonal.length > 0 && <a href="#seasonal" className="sol-seasonal-jump">Fall specials <span>Here now</span></a>}
+      {menu.map((group) => <a key={group.title} href={`#${group.title.toLowerCase().replace(" ", "-")}`}>{group.title}</a>)}
+    </div></div></nav>
+    <SeasonalFeature />
+    {!seasonal.length && <header className="sol-page-header sol-wrap text-center"><h1>Made by hand.<br /><em>Picked by you.</em></h1></header>}
+    <div className="sol-menu-collection">
+      {menu.map((group, index) => <section id={group.title.toLowerCase().replace(" ", "-")} key={group.title} className={`sol-tasting-section sol-tasting-${group.title.toLowerCase().replace(" ", "-")}`}>
+        <div className="sol-wrap sol-tasting-layout">
+          <div className="sol-tasting-heading"><p className="sol-label">0{index + 1} / The Casa Sol menu</p><h2>{group.title}</h2><p className="sol-tasting-mood">{categoryNotes[index]}</p><p className="sol-category-note">{group.note}</p>{index === 1 && <figure className="sol-coffee-photo"><img src="/images/IMG_3545.jpg" alt="Cold foam poured by hand over a Casa Sol drink" width={1000} height={1400} loading="lazy" /><figcaption>made with a little extra love</figcaption></figure>}</div>
+          <ul className="sol-tasting-drinks">{group.items.map((item) => <li className="sol-tasting-drink" key={item.name}><div className="sol-drink-portrait"><DrinkIllustration name={item.name} /></div><div className="sol-drink-copy"><h3>{item.name}</h3><p>{item.description}</p></div></li>)}</ul>
         </div>
-      </section>
-
-      <div className="sol-page-menu sol-page-panel bg-surface-sage py-16"><SolWave /><SolBackground variant="coffee" />
-      <div className="mx-auto grid max-w-5xl gap-8 px-5 md:grid-cols-2">
-        {menu.map((section) => (
-          <section
-            key={section.title}
-            className="rounded-[1.75rem] border border-border/70 bg-card p-8 shadow-luxe"
-          >
-            <div className="flex items-center gap-3">
-              {section.title === "Matcha" ? (
-                <Leaf size={20} className="text-secondary-foreground" />
-              ) : (
-                <Coffee size={20} className="text-primary" />
-              )}
-              <h2 className="text-2xl">{section.title}</h2>
-            </div>
-            <p className="mt-1 text-sm text-muted-foreground">{section.note}</p>
-
-            <ul className="mt-6 space-y-5">
-              {section.items.map((item) => {
-                const Icon = drinkIcons[item.name] ?? Sun;
-                return (
-                  <li
-                    key={item.name}
-                    className="border-b border-border/60 pb-5 last:border-0 last:pb-0"
-                  >
-                    <p className="flex items-center gap-2.5">
-                      <span className="glow-sage relative isolate grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent">
-                        <Icon size={17} className="text-primary" />
-                      </span>
-                      <span className="font-display text-xl font-bold text-primary">
-                        {item.name}
-                      </span>
-                    </p>
-                    <p className="mt-1 pl-[3.1rem] text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
-        ))}
-      </div>
-
-      </div>
-
-      <div className="sol-page-panel sol-page-gallery bg-surface-sand py-16"><SolBackground variant="garden" />
-      <div className="mx-auto grid max-w-5xl gap-4 px-5 sm:grid-cols-2">
-        <img
-          src={photoMatcha}
-          alt="A guest holding a Casa Sol strawberry matcha"
-          loading="lazy"
-          className="h-64 w-full rounded-[1.75rem] object-cover shadow-luxe"
-        />
-        <img
-          src={photoFoam}
-          alt="Cold foam poured over a Casa Sol iced drink"
-          loading="lazy"
-          className="h-64 w-full rounded-[1.75rem] object-cover shadow-luxe"
-        />
-        <img
-          src={photoMenu}
-          alt="Printed Casa Sol event menus"
-          loading="lazy"
-          className="h-64 w-full rounded-[1.75rem] object-cover shadow-luxe"
-        />
-        <img
-          src={photoPour}
-          alt="Pouring oat milk into iced matcha at a Casa Sol pop-up"
-          loading="lazy"
-          className="h-64 w-full rounded-[1.75rem] object-cover shadow-luxe"
-        />
-      </div>
-
-      </div>
-
-      <section className="sol-page-panel sol-page-special bg-surface-blush py-20 text-center"><SolWave /><SolBackground />
-      <div className="mx-auto max-w-3xl px-5">
-        <h2 className="mt-3 text-2xl">Seasonal &amp; Specialty</h2>
-        <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
-          We rotate limited flavors throughout the year — and we love creating a custom drink named
-          just for your event.
-        </p>
-        {seasonal.length > 0 && (
-          <ul className="mt-5 flex flex-wrap justify-center gap-2">
-            {seasonal.map((s) => (
-              <li
-                key={s.name}
-                className="rounded-full bg-background px-4 py-2 text-sm text-foreground"
-              >
-                {s.name}
-                <span className="text-muted-foreground"> · {s.description}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <Link
-          href="/book"
-          className="sol-button mt-7"
-        >
-          Book Casa Sol
-        </Link>
-      </div>
-      </section>
-    </SolMotion>
-  );
+      </section>)}
+    </div>
+    <section className="sol-quiet-cta sol-wrap"><div><p className="eyebrow">Your favorites, your way</p><h2>For your gathering.<br /><em>Or your everyday.</em></h2></div><div><p>Explore beverage catering for your next celebration, or have freshly prepared 20-ounce drinks delivered to you.</p><div className="sol-actions"><Link href="/packages" className="sol-button">Explore packages <ArrowRight size={16} /></Link><Link href="/book?type=delivery#inquiry" className="sol-text-link">Ask about delivery <ArrowRight size={16} /></Link></div></div></section>
+  </SolMotion>;
 }

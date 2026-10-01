@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 const logo = "/images/casa-sol-logo-transparent.png";
 
 export function SiteFooter() {
@@ -13,7 +13,8 @@ export function SiteFooter() {
           height={212}
           className="mx-auto h-28 w-auto sm:h-36"
         />
-        <p className="eyebrow mt-3">Matcha &amp; Coffee · DMV Area</p>
+        <p className="eyebrow mt-3">A mobile beverage experience · DMV</p>
+        <p className="mt-3 text-sm text-muted-foreground" lang="es">Se habla español. Un poquito de sol para todos.</p>
 
         <div className="mt-6 flex flex-col items-center gap-3 text-sm text-muted-foreground sm:flex-row sm:justify-center sm:gap-8">
           <a
@@ -30,7 +31,9 @@ export function SiteFooter() {
           </a>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-6 text-sm">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
+          <Link href="/packages" className="hover:text-primary">Experiences</Link>
+          <Link href="/#delivery" className="hover:text-primary">Delivery</Link>
           <Link href="/menu" className="hover:text-primary">
             Menu
           </Link>
@@ -42,9 +45,6 @@ export function SiteFooter() {
           </Link>
         </div>
 
-        <p className="mt-8 inline-flex items-center gap-2 text-xs text-muted-foreground">
-          Made with <Heart size={11} className="text-primary" fill="currentColor" /> in the DMV
-        </p>
       </div>
     </footer>
   );

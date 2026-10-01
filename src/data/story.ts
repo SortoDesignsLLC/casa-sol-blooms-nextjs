@@ -1,0 +1,5 @@
+export const story = [
+  "Casa Sol grew from the coffee and connection I knew growing up in El Salvador. Before school, my aunt would send me off with a thermos of warm milk, a splash of coffee, and a little sugar. In Salvadoran homes, café con pan is more than coffee and bread—it’s a moment to slow down, catch up, and feel close. I’ve carried that tradition into my own home with my children.",
+  "El Salvador has a rich coffee-growing tradition, and our cold brew honors it with a house blend of coffees from back home. Every drink is made with intention, including our house-made fruit purées, cold foams, and signature drink components.",
+  "After I was laid off, I spent time searching for what came next. Casa Sol helped me reconnect with what has always mattered to me: showing love, supporting my community, and giving back. Sharing what I create at gatherings feels like living my purpose. As Casa Sol grows, I hope to give back to the DMV community that helped shape me—and to children back home. Casa Sol means “House of Sun,” and I hope every cup brings a little of that warmth to your gathering.",
+];
