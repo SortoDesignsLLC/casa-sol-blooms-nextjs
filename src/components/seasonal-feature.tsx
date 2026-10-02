@@ -1,3 +1,4 @@
+import { getTranslations } from "@/lib/i18n/server";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { seasonal } from "@/data/menu";
@@ -28,13 +29,14 @@ function AutumnBackground() {
   return <div className={styles.art} aria-hidden="true"><Pumpkin className={styles.pumpkinLeft} /><Pumpkin className={styles.pumpkinRight} /><AutumnLeaf className={styles.leafLeft} /><AutumnLeaf className={styles.leafRight} /></div>;
 }
 
-export function SeasonalFeature({ preview = false }: { preview?: boolean }) {
+export async function SeasonalFeature({ preview = false }: { preview?: boolean }) {
+  const t = await getTranslations();
   if (!seasonal.length) return null;
   if (preview) return <section id="fall-at-casa-sol" className={`${styles.season} ${styles.preview}`} aria-labelledby="fall-preview-title">
     <div className={`sol-wrap ${styles.previewLayout}`}>
       <Pumpkin className={styles.stripPumpkin} />
-      <div className={styles.previewCopy}><p className={styles.eyebrow}>The seasonal collection</p><h2 id="fall-preview-title" className={styles.stripTitle}>Fall favorites are here.</h2><p className={styles.stripDescription}>Pumpkin, panela &amp; warm spice. Only for fall.</p></div>
-      <Link href="/menu#seasonal" className={styles.stripLink}>Explore the fall menu <ArrowRight size={17} /></Link>
+      <div className={styles.previewCopy}><p className={styles.eyebrow}>{t("The seasonal collection")}</p><h2 id="fall-preview-title" className={styles.stripTitle}>{t("Fall favorites are here.")}</h2><p className={styles.stripDescription}>{t("Pumpkin, panela & warm spice. Only for fall.")}</p></div>
+      <Link href="/menu#seasonal" className={styles.stripLink}>{t("Explore the fall menu ")}<ArrowRight size={17} /></Link>
     </div>
   </section>;
 
@@ -42,11 +44,11 @@ export function SeasonalFeature({ preview = false }: { preview?: boolean }) {
     <AutumnBackground />
     <div className="sol-wrap">
       <div className={styles.menuHeading}>
-        <div><p className={styles.eyebrow}>The Casa Sol menu · Fall edition</p><h1 id="fall-menu-title" className={styles.title}>Fall is here.<br /><em>Let’s sip it in.</em></h1></div>
-        <div className={styles.menuIntro}><span className={styles.seasonStamp}>Only for<br /><em>the season</em><span aria-hidden="true">✦</span></span><p>Four cozy pours. Pumpkin, warm spice, and the homemade touches you love — here for a little while.</p></div>
+        <div><p className={styles.eyebrow}>{t("The Casa Sol menu · Fall edition")}</p><h1 id="fall-menu-title" className={styles.title}>{t("Fall is here.")}<br /><em>{t("Let’s sip it in.")}</em></h1></div>
+        <div className={styles.menuIntro}><span className={styles.seasonStamp}>{t("Only for")}<br /><em>{t("the season")}</em><span aria-hidden="true">✦</span></span><p>{t("Four cozy pours. Pumpkin, warm spice, and the homemade touches you love — here for a little while.")}</p></div>
       </div>
-      <div className={styles.drinks}>{seasonal.map((item) => <article className={styles.drink} key={item.name}><div className={styles.drinkArt}><DrinkIllustration name={item.name} context="fall-menu" /></div><p className={styles.drinkCategory}>{item.category}</p><h2>{item.name}</h2><p className={styles.description}>{item.description}</p></article>)}</div>
-      <div className={styles.menuFooter}><p>Here for fall. Savor it while it’s here.<small>Seasonal availability is confirmed with your inquiry.</small></p><Link href="/book#inquiry" className={styles.button}>Ask about fall flavors <ArrowRight size={17} /></Link></div>
+      <div className={styles.drinks}>{seasonal.map((item) => <article className={styles.drink} key={item.name}><div className={styles.drinkArt}><DrinkIllustration name={item.name} context="fall-menu" /></div><p className={styles.drinkCategory}>{t(item.category || "")}</p><h2>{item.name}</h2><p className={styles.description}>{t(item.description)}</p></article>)}</div>
+      <div className={styles.menuFooter}><p>{t("Here for fall. Savor it while it’s here.")}<small>{t("Seasonal availability is confirmed with your inquiry.")}</small></p><Link href="/book#inquiry" className={styles.button}>{t("Ask about fall flavors ")}<ArrowRight size={17} /></Link></div>
     </div>
   </section>;
 }

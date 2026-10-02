@@ -1,4 +1,6 @@
 "use client";
+import { useLanguage } from "@/components/language-provider";
+import { LanguageToggle } from "./language-toggle";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -17,6 +19,7 @@ const links = [
 ] as const;
 
 export function SiteNav() {
+  const { t } = useLanguage();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const drawer = useRef<HTMLDialogElement>(null);
@@ -45,20 +48,21 @@ export function SiteNav() {
 
   return <>
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
-      <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3 md:flex md:justify-between">
+      <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 md:flex md:justify-between">
         <Link href="/" className="min-w-0">
           <img src={logo} alt="Casa Sol Matcha & Coffee" className="h-14 w-auto sm:h-16" width={220} height={60} />
         </Link>
-        <nav aria-label="Main navigation" className="hidden items-center gap-6 md:flex">
-          {links.map(l => <Link key={l.to} href={l.to} aria-current={pathname === l.to ? "page" : undefined} className="text-sm tracking-wide text-muted-foreground transition-colors hover:text-primary">{l.to === "/about" ? "About" : l.label}</Link>)}
+        <nav aria-label={t("Main navigation")} className="hidden items-center gap-4 lg:gap-6 md:flex">
+          {links.map(l => <Link key={l.to} href={l.to} aria-current={pathname === l.to ? "page" : undefined} className="text-sm tracking-wide text-muted-foreground transition-colors hover:text-primary">{t(l.to === "/about" ? "About" : l.label)}</Link>)}
         </nav>
-        <button ref={trigger} type="button" aria-expanded={open} aria-controls="mobile-navigation" aria-haspopup="dialog" aria-label="Open menu" onClick={openDrawer} className={styles.menuButton}>
-          <span>Explore</span><Menu size={19} aria-hidden="true" />
-        </button>
+        <div className={styles.headerControls}><LanguageToggle compact />
+        <button ref={trigger} type="button" aria-expanded={open} aria-controls="mobile-navigation" aria-haspopup="dialog" aria-label={t("Open menu")} onClick={openDrawer} className={styles.menuButton}>
+          <span>{t("Explore")}</span><Menu size={19} aria-hidden="true" />
+        </button></div>
       </div>
     </header>
 
-    <dialog ref={drawer} id="mobile-navigation" aria-label="Explore Casa Sol" className={styles.drawer}
+    <dialog ref={drawer} id="mobile-navigation" aria-label={t("Explore Casa Sol")} className={styles.drawer}
       onClose={() => { setOpen(false); if (window.matchMedia("(max-width: 767px)").matches) trigger.current?.focus({ preventScroll: true }); }}
       onKeyDown={event => {
         if (event.key !== "Tab") return;
@@ -74,34 +78,35 @@ export function SiteNav() {
         if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeDrawer();
       }}>
       <div className={styles.drawerTop}>
-        <Link href="/" onClick={closeDrawer}><img src={logo} alt="Casa Sol home" width={110} height={85} /></Link>
-        <button ref={closeButton} type="button" onClick={closeDrawer} aria-label="Close menu" className={styles.closeButton}><X size={21} aria-hidden="true" /></button>
+        <Link href="/" onClick={closeDrawer}><img src={logo} alt={t("Casa Sol home")} width={110} height={85} /></Link>
+        <button ref={closeButton} type="button" onClick={closeDrawer} aria-label={t("Close menu")} className={styles.closeButton}><X size={21} aria-hidden="true" /></button>
       </div>
       <div className={styles.welcome}>
-        <p>A little sunshine,<br /><em>wherever you gather.</em></p>
+        <p>{t("A little sunshine,")}<br /><em>{t("wherever you gather.")}</em></p>
         <BotanicalBranch className={styles.sprig} />
       </div>
-      <nav aria-label="Mobile navigation" className={styles.drawerLinks}>
+      <nav aria-label={t("Mobile navigation")} className={styles.drawerLinks}>
         {links.filter(l => l.to !== "/book").map(({ to, label, detail, icon: Icon }) => <Link key={to} href={to} onClick={closeDrawer} aria-current={pathname === to ? "page" : undefined}>
           <Icon className={styles.linkIcon} size={19} strokeWidth={1.4} aria-hidden="true" />
-          <span><strong>{label}</strong><small>{detail}</small></span>
+          <span><strong>{t(label)}</strong><small>{t(detail)}</small></span>
           <ArrowUpRight className={styles.linkArrow} size={17} strokeWidth={1.3} aria-hidden="true" />
         </Link>)}
       </nav>
+      <div className={styles.drawerLanguage}><span>{t("Your language", "Tu idioma")}</span><LanguageToggle /></div>
       <div className={styles.drawerBottom}>
-        <p className={styles.invitation}>Something worth celebrating?</p>
-        <Link href="/book" onClick={closeDrawer} className={styles.bookingLink}><CalendarDays size={18} aria-hidden="true" /> Plan your event <ArrowRight size={18} aria-hidden="true" /></Link>
+        <p className={styles.invitation}>{t("Something worth celebrating?")}</p>
+        <Link href="/book" onClick={closeDrawer} className={styles.bookingLink}><CalendarDays size={18} aria-hidden="true" />{t(" Plan your event ")}<ArrowRight size={18} aria-hidden="true" /></Link>
         <div className={styles.contactLinks}>
-          <a href="tel:3018353714"><Phone size={15} aria-hidden="true" />Call us</a>
+          <a href="tel:3018353714"><Phone size={15} aria-hidden="true" />{t("Call us")}</a>
           <span aria-hidden="true" />
-          <a href="mailto:casasolmatchacoffee@gmail.com"><Mail size={15} aria-hidden="true" />Say hello</a>
+          <a href="mailto:casasolmatchacoffee@gmail.com"><Mail size={15} aria-hidden="true" />{t("Say hello")}</a>
         </div>
       </div>
     </dialog>
 
-    {pathname !== "/book" && <nav aria-label="Quick actions" className={styles.actionBar}>
-      <Link href="/book" className={styles.actionPrimary}><CalendarDays size={19} strokeWidth={1.6} aria-hidden="true" /><span>Plan your event</span><ArrowRight size={17} aria-hidden="true" /></Link>
-      <a href="tel:3018353714" className={styles.actionSecondary}><Phone size={18} strokeWidth={1.6} aria-hidden="true" /><span>Call us</span></a>
+    {pathname !== "/book" && <nav aria-label={t("Quick actions")} className={styles.actionBar}>
+      <Link href="/book" className={styles.actionPrimary}><CalendarDays size={19} strokeWidth={1.6} aria-hidden="true" /><span>{t("Plan your event")}</span><ArrowRight size={17} aria-hidden="true" /></Link>
+      <a href="tel:3018353714" className={styles.actionSecondary}><Phone size={18} strokeWidth={1.6} aria-hidden="true" /><span>{t("Call us")}</span></a>
     </nav>}
   </>;
 }

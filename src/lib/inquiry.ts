@@ -27,7 +27,7 @@ export function inquirySchema(language: InquiryLanguage = "en") {
   const es = language === "es";
   const required = es ? "Completa este campo." : "Please complete this field.";
   const text = (max: number) => z.string({ required_error: required }).trim().min(1, required).max(max, es ? "Acorta un poco este texto." : "Please shorten this text.");
-  const count = (min: number) => z.preprocess((value) => value === "" || value === undefined ? undefined : Number(value), z.number({ required_error: required, invalid_type_error: required }).int(es ? "Usa un número entero." : "Use a whole number.").min(min, es ? "Revisa esta cantidad." : "Please check this quantity.").max(10000));
+  const count = (min: number) => z.preprocess((value) => value === "" || value === undefined ? undefined : Number(value), z.number({ required_error: required, invalid_type_error: required }).int(es ? "Usa un número entero." : "Use a whole number.").min(min, es ? "Revisa esta cantidad." : "Please check this quantity.").max(10000, es ? "Revisa esta cantidad." : "Please check this quantity."));
   const date = text(10).regex(/^\d{4}-\d{2}-\d{2}$/, es ? "Elige una fecha válida." : "Choose a valid date.").refine((value) => {
     const parsed = new Date(value + "T12:00:00Z");
     return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value && value >= todayISO();
@@ -42,7 +42,7 @@ export function inquirySchema(language: InquiryLanguage = "en") {
     address: text(200),
     city: text(100),
     zip: text(10).regex(/^\d{5}(-\d{4})?$/, es ? "Ingresa un código postal válido." : "Enter a valid ZIP code."),
-    notes: z.string().trim().max(2000).default(""),
+    notes: z.string().trim().max(2000, es ? "Acorta un poco este texto." : "Please shorten this text.").default(""),
     website: z.string().max(0).default(""),
   };
   return z.discriminatedUnion("kind", [
@@ -51,12 +51,12 @@ export function inquirySchema(language: InquiryLanguage = "en") {
       eventType: text(40).refine((v) => eventTypes.some((t) => t[0] === v), required),
       hours: z.enum(["2", "3", "extended"], { errorMap: () => ({ message: required }) }),
       adults: count(1),
-      children: z.preprocess((v) => v === "" || v === undefined ? undefined : Number(v), z.number().int().min(0).max(10000).optional()),
+      children: z.preprocess((v) => v === "" || v === undefined ? undefined : Number(v), z.number({ invalid_type_error: required }).int(es ? "Usa un número entero." : "Use a whole number.").min(0, es ? "Revisa esta cantidad." : "Please check this quantity.").max(10000, es ? "Revisa esta cantidad." : "Please check this quantity.").optional()),
       package: z.string().refine((v) => v === "unsure" || packages.some((p) => p.id === v), required),
       setup: z.enum(["signature", "cart", "unsure"]),
       setting: z.enum(["indoor", "outdoor", "unsure"]),
       beverages: z.array(z.enum(["Matcha", "Cold Brew", "Mocktails", "Not sure"])).min(1, es ? "Elige al menos una opción." : "Choose at least one option.").max(4),
-      flavors: z.string().trim().max(1000).default(""),
+      flavors: z.string().trim().max(1000, es ? "Acorta un poco este texto." : "Please shorten this text.").default(""),
     }),
     z.object({
       ...common, kind: z.literal("delivery"),
@@ -64,7 +64,7 @@ export function inquirySchema(language: InquiryLanguage = "en") {
       drinks: z.array(z.object({
         flavor: text(100).refine((v) => drinkChoices.includes(v), es ? "Elige un sabor del menú." : "Choose a flavor from the menu."),
         quantity: count(1),
-      })).min(1).max(20).refine((items) => items.reduce((sum, item) => sum + item.quantity, 0) >= 5, es ? "El pedido mínimo es de 5 bebidas." : "Delivery has a five-drink minimum."),
+      })).min(1, es ? "Elige al menos una bebida." : "Choose at least one drink.").max(20, es ? "Elige un máximo de 20 sabores." : "Choose no more than 20 flavors.").refine((items) => items.reduce((sum, item) => sum + item.quantity, 0) >= 5, es ? "El pedido mínimo es de 5 bebidas." : "Delivery has a five-drink minimum."),
     }),
   ]);
 }
@@ -72,33 +72,36 @@ export function inquirySchema(language: InquiryLanguage = "en") {
 export type Inquiry = z.infer<ReturnType<typeof inquirySchema>>;
 
 export function inquiryMessage(data: Inquiry) {
+  const es = data.language === "es";
+  const t = (en: string, spanish: string) => es ? spanish : en;
+  const beverage = (value: string) => ({ "Cold Brew": t("Cold Brew", "Café frío"), Mocktails: t("Mocktails", "Cócteles sin alcohol"), "Not sure": t("Not sure", "Aún no lo sé") })[value] || value;
   const lines = [
-    "Inquiry: " + (data.kind === "event" ? "Event or Pop-Up" : "Fresh Drink Delivery"),
-    "Name: " + data.name, "Email: " + data.email, "Phone: " + data.phone,
-    "Preferred language: " + (data.language === "es" ? "Español" : "English"),
-    (data.kind === "event" ? "Event" : "Delivery") + " date: " + data.date,
-    "Requested start / delivery time: " + data.time,
-    "Address: " + data.address + ", " + data.city + ", " + data.zip,
+    t("Inquiry: ", "Consulta: ") + (data.kind === "event" ? t("Event or Pop-Up", "Evento o Pop-Up") : t("Fresh Drink Delivery", "Entrega de bebidas frescas")),
+    t("Name: ", "Nombre: ") + data.name, t("Email: ", "Correo: ") + data.email, t("Phone: ", "Teléfono: ") + data.phone,
+    t("Preferred language: ", "Idioma de preferencia: ") + (es ? "Español" : "English"),
+    (data.kind === "event" ? t("Event date: ", "Fecha del evento: ") : t("Delivery date: ", "Fecha de entrega: ")) + data.date,
+    t("Requested start / delivery time: ", "Hora de inicio / entrega solicitada: ") + data.time,
+    t("Address: ", "Dirección: ") + data.address + ", " + data.city + ", " + data.zip,
   ];
   if (data.kind === "event") {
     lines.push(
-      "Event type: " + (eventTypes.find((type) => type[0] === data.eventType)?.[1] || data.eventType),
-      "Service duration: " + (data.hours === "extended" ? "More than 3 hours" : data.hours + " hours"),
-      "Adult guests: " + data.adults, "Children: " + (data.children ?? "Not provided"),
-      "Setting: " + data.setting,
-      "Package: " + (packages.find((p) => p.id === data.package)?.name || "Not sure"),
-      "Setup: " + ({ signature: "Signature Casa Sol Setup — included", cart: "Casa Sol Wooden Cart Experience — premium add-on", unsure: "Not sure" }[data.setup]),
-      "Beverage categories: " + data.beverages.join(", "),
-      "Preferred flavors: " + (data.flavors || "To discuss"),
+      t("Event type: ", "Tipo de evento: ") + (eventTypes.find((type) => type[0] === data.eventType)?.[es ? 2 : 1] || data.eventType),
+      t("Service duration: ", "Duración del servicio: ") + (data.hours === "extended" ? t("More than 3 hours", "Más de 3 horas") : data.hours + t(" hours", " horas")),
+      t("Adult guests: ", "Adultos: ") + data.adults, t("Children: ", "Niños: ") + (data.children ?? t("Not provided", "Sin especificar")),
+      t("Setting: ", "Lugar: ") + (es ? { indoor: "Interior", outdoor: "Exterior", unsure: "Por definir" }[data.setting] : data.setting),
+      t("Package: ", "Paquete: ") + (packages.find((p) => p.id === data.package)?.name || t("Not sure", "Por definir")),
+      t("Setup: ", "Montaje: ") + ({ signature: t("Signature Casa Sol Setup — included", "Montaje clásico Casa Sol — incluido"), cart: t("Casa Sol Wooden Cart Experience — premium add-on", "Carrito de madera Casa Sol — adicional premium"), unsure: t("Not sure", "Por definir") }[data.setup]),
+      t("Beverage categories: ", "Tipos de bebidas: ") + data.beverages.map(beverage).join(", "),
+      t("Preferred flavors: ", "Sabores preferidos: ") + (data.flavors || t("To discuss", "Por definir")),
     );
   } else {
-    lines.push("Business / suite / floor: " + (data.business || "Not provided"), "Drink size: 20 ounces", "Requested drinks:");
+    lines.push(t("Business / suite / floor: ", "Negocio / oficina / piso: ") + (data.business || t("Not provided", "Sin especificar")), t("Drink size: 20 ounces", "Tamaño de las bebidas: 20 onzas"), t("Requested drinks:", "Bebidas solicitadas:"));
     data.drinks.forEach((item) => lines.push("  " + item.quantity + " × " + item.flavor));
-    lines.push("Total drinks: " + data.drinks.reduce((sum, item) => sum + item.quantity, 0));
+    lines.push(t("Total drinks: ", "Total de bebidas: ") + data.drinks.reduce((sum, item) => sum + item.quantity, 0));
   }
-  lines.push("Additional details: " + (data.notes || "None"), "", "Please share availability and the full quote, including applicable fees and tax, before confirmation. This inquiry does not reserve a date or confirm an order.");
+  lines.push(t("Additional details: ", "Detalles adicionales: ") + (data.notes || t("None", "Ninguno")), "", t("Please share availability and the full quote, including applicable fees and tax, before confirmation. This inquiry does not reserve a date or confirm an order.", "Por favor, compartan la disponibilidad y la cotización completa, incluyendo cargos e impuestos aplicables, antes de confirmar. Esta consulta no reserva una fecha ni confirma un pedido."));
   return {
-    subject: "Casa Sol " + (data.kind === "event" ? "event" : "delivery") + " inquiry — " + data.date,
+    subject: es ? "Consulta de " + (data.kind === "event" ? "evento" : "entrega") + " Casa Sol — " + data.date : "Casa Sol " + (data.kind === "event" ? "event" : "delivery") + " inquiry — " + data.date,
     text: lines.join("\n"),
   };
 }

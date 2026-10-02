@@ -13,9 +13,6 @@
 .email { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; margin: 18px 0 0 32px; border-bottom: 1px solid #b3b9a1; padding-bottom: 3px; }
 .workspace { min-width: 0; scroll-margin-top: 110px; }
 .toolbar { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding-bottom: 22px; }
-.language { display: flex; gap: 3px; }
-.language button { padding: 8px 10px; min-height: 38px; font-size: 12px; border-radius: 20px; color: #646954; }
-.language button[aria-pressed="true"] { background: #e6eadb; color: #394335; }
 .progress { border-block: 1px solid #dcded0; padding-block: 17px; }
 .progress ol { display: flex; list-style: none; margin: 0; padding: 0; justify-content: space-between; gap: 8px; }
 .progress button { display: flex; align-items: center; gap: 7px; font-size: 11px; min-height: 35px; color: #69705e; }
@@ -112,7 +109,6 @@
   .aside h1 { font-size: 35px; }
   .aside > p:first-child { font-size: 10px; }
   .toolbar > span { font-size: 8px; letter-spacing: .12em; }
-  .language button { padding-inline: 8px; font-size: 11px; }
   .progress { padding-block: 12px; }
   .progress ol { gap: 5px; }
   .progress button { font-size: 9px; }
@@ -167,8 +163,6 @@
 .photo { position: relative; }
 .photo img { border: 6px solid #fffaf2; outline: 1px solid #e5d7c9; transform: rotate(-2deg); }
 .page .photo figcaption { font-style: normal; font-size: 24px; margin-top: 20px; color: #926071; }
-.language { background: #f0eee3; border-radius: 30px; padding: 3px; }
-.language button[aria-pressed="true"] { background: #fffaf2; box-shadow: 0 1px 3px #39433512; }
 .progress button[aria-current="step"] > span { background: #efd7d8; border-color: #d5a6ad; color: #63434e; box-shadow: 0 0 0 4px #f8eeeb; }
 .choices button:nth-child(2) { background: #fcf4ef; }
 .choices button[aria-pressed="true"] { box-shadow: 0 3px 0 #dbe2cc; }

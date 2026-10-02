@@ -1,3 +1,6 @@
+import { localizeMetadata } from "@/lib/i18n/metadata";
+import { getLocale } from "@/lib/i18n/server";
+import { LanguageProvider } from "@/components/language-provider";
 import type { Metadata, Viewport } from "next";
 import { metadataBase, sharedOpenGraph, sharedTwitter } from "@/lib/metadata";
 import { SiteNav } from "@/components/site-nav";
@@ -6,7 +9,7 @@ import { Toaster } from "@/components/toaster";
 import "@/styles.css";
 import "@/experience.css";
 export const viewport: Viewport = { themeColor: "#fbf6eb" };
-export const metadata: Metadata = {
+const pageMetadata: Metadata = {
   metadataBase,
   applicationName: "Casa Sol",
   openGraph: sharedOpenGraph,
@@ -24,13 +27,18 @@ export const metadata: Metadata = {
   },
   twitter: sharedTwitter,
 };
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><head>
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const locale = await getLocale();
+  return <html lang={locale}><head>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Karla:wght@300;400;500&family=Style+Script&display=swap" rel="stylesheet" />
   </head><body>
-    <div className="flex min-h-screen flex-col"><SiteNav /><main className="flex-1">{children}</main><SiteFooter /></div>
-    <Toaster position="top-center" />
+    <LanguageProvider locale={locale}><div className="flex min-h-screen flex-col"><SiteNav /><main className="flex-1">{children}</main><SiteFooter /></div>
+    <Toaster position="top-center" /></LanguageProvider>
   </body></html>;
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return localizeMetadata(pageMetadata);
 }

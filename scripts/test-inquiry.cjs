@@ -152,3 +152,40 @@ test("delivery step enforces the five-drink minimum before collecting contact de
   assert.deepEqual(inquiryStepErrors(inquirySchema().safeParse(fixed), 2), {});
   assert.deepEqual(inquiryStepErrors(inquirySchema().safeParse(delivery), 4), {});
 });
+
+test("language negotiation respects saved choices, regional tags, weights and fallbacks", () => {
+  const { resolveLocale } = require("../src/lib/i18n/locale.ts");
+  assert.equal(resolveLocale(undefined, "es-MX,es;q=0.9,en;q=0.8"), "es");
+  assert.equal(resolveLocale(undefined, "es;q=0.5,en-US;q=0.9"), "en");
+  assert.equal(resolveLocale(undefined, "fr-CA,es-SV;q=0.8,en;q=0.5"), "es");
+  assert.equal(resolveLocale(undefined, "EN-gb,es;q=0.9"), "en");
+  assert.equal(resolveLocale(undefined, "es;q=0,en;q=0.5"), "en");
+  assert.equal(resolveLocale(undefined, "es;q=bad,en;q=0.5"), "en");
+  assert.equal(resolveLocale(undefined, "fr-FR,de;q=0.8"), "en");
+  assert.equal(resolveLocale(undefined, null), "en");
+  assert.equal(resolveLocale("en", "es-MX"), "en");
+  assert.equal(resolveLocale("es", "en-US"), "es");
+  assert.equal(resolveLocale("invalid", "es-SV"), "es");
+});
+
+test("Spanish email drafts preserve inquiry details and translate event and delivery labels", () => {
+  const spanishEvent = inquiryMessage(inquirySchema("es").parse({ ...event, language: "es" }));
+  assert.match(spanishEvent.subject, /Consulta de evento Casa Sol/);
+  assert.match(spanishEvent.text, /Adultos: 31/);
+  assert.match(spanishEvent.text, /Tipo de evento: Cumpleaños/);
+  assert.match(spanishEvent.text, /Tipos de bebidas: Matcha, Cócteles sin alcohol/);
+  assert.match(spanishEvent.text, /Paquete: Sol Social/);
+  const spanishDelivery = inquiryMessage(inquirySchema("es").parse({ ...delivery, language: "es" }));
+  assert.match(spanishDelivery.text, /Total de bebidas: 5/);
+  assert.match(spanishDelivery.text, /3 × Fresa Fresca/);
+  assert.match(spanishDelivery.text, /Esta consulta no reserva una fecha ni confirma un pedido/);
+});
+
+test("Spanish dictionary covers menu descriptions, story and experience data", () => {
+  const dictionary = require("../src/lib/i18n/es.json");
+  const { menu, seasonal } = require("../src/data/menu.ts");
+  const { story } = require("../src/data/story.ts");
+  const { packages, enhancements } = require("../src/data/experiences.ts");
+  const copy = [...story, ...menu.flatMap(group => [group.title, group.note, ...group.items.map(item => item.description)]), ...seasonal.map(item => item.description), ...packages.flatMap(item => [item.description, item.guests]), ...enhancements.flatMap(item => [item.title, item.description, item.price])];
+  for (const text of copy) assert.ok(dictionary[text], "Missing translation: " + text);
+});

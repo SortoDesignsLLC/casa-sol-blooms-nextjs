@@ -51,3 +51,11 @@ Source: https://github.com/ErickSorto/casa-sol-blooms (snapshot fe75707). This c
 All pages share `public/social/casa-sol-preview.jpg` (1200 × 630) with Open Graph and Twitter image metadata. Configure the public origin with `SITE_URL` (see `.env.example`); rebuild when changing it. Messaging services need a publicly accessible deployment and may cache an older preview.
 
 The sun favicon is maintained as `public/icon.svg`. PNG sizes and the multi-size ICO can be regenerated with `node scripts/generate-icons.mjs`. The image tooling uses Sharp, provided by Next.js.
+
+## English and Spanish
+
+The first response uses the browser’s `Accept-Language` preference list, including regional variants such as `es-MX` and `es-SV`. Unsupported languages fall back to English. The language toggle saves an explicit choice in the `casa-sol-language` cookie for one year; that choice takes priority on every page and subsequent visit. No location permission is needed.
+
+Pages render in the selected language on the server, including the HTML language, metadata, image descriptions, navigation, menu, story, pricing and booking terms. This uses request-time rendering and requires the normal Next.js server. Existing URLs, query parameters and section links stay the same. Changing language refreshes the server content without remounting the inquiry, so answers and the current step are retained. Prepared email drafts and validation messages use the selected language.
+
+Maintain Spanish copy in `src/lib/i18n/es.json`, keyed by its English source text; the inquiry and terms also contain paired English/Spanish copy. Keep drink and package names as brand names, and keep internal IDs and form values stable. When editing English copy, update its Spanish entry too. `npm test` checks language negotiation, translated inquiry drafts and translation coverage for the shared content data.

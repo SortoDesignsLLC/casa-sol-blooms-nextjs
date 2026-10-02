@@ -1,8 +1,10 @@
+import { getTranslations } from "@/lib/i18n/server";
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 const logo = "/images/casa-sol-logo-transparent.png";
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const t = await getTranslations();
   return (
     <footer className="mt-24 border-t border-border/60 bg-muted/50">
       <div className="mx-auto max-w-5xl px-5 py-12 text-center">
@@ -13,8 +15,8 @@ export function SiteFooter() {
           height={212}
           className="mx-auto h-28 w-auto sm:h-36"
         />
-        <p className="eyebrow mt-3">A mobile beverage experience · DMV</p>
-        <p className="mt-3 text-sm text-muted-foreground" lang="es">Se habla español. Un poquito de sol para todos.</p>
+        <p className="eyebrow mt-3">{t("A mobile beverage experience · DMV")}</p>
+        <p className="mt-3 text-sm text-muted-foreground" lang="es">{t("Se habla español. Un poquito de sol para todos.")}</p>
 
         <div className="mt-6 flex flex-col items-center gap-3 text-sm text-muted-foreground sm:flex-row sm:justify-center sm:gap-8">
           <a
@@ -32,17 +34,11 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm">
-          <Link href="/packages" className="hover:text-primary">Experiences</Link>
-          <Link href="/#delivery" className="hover:text-primary">Delivery</Link>
-          <Link href="/menu" className="hover:text-primary">
-            Menu
-          </Link>
-          <Link href="/book" className="hover:text-primary">
-            Book Us
-          </Link>
-          <Link href="/about" className="hover:text-primary">
-            About
-          </Link>
+          <Link href="/packages" className="hover:text-primary">{t("Experiences")}</Link>
+          <Link href="/#delivery" className="hover:text-primary">{t("Delivery")}</Link>
+          <Link href="/menu" className="hover:text-primary">{t(" Menu ")}</Link>
+          <Link href="/book" className="hover:text-primary">{t(" Book Us ")}</Link>
+          <Link href="/about" className="hover:text-primary">{t(" About ")}</Link>
         </div>
 
       </div>
