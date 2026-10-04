@@ -2,7 +2,7 @@
 import { useLanguage } from "@/components/language-provider";
 import { LanguageToggle } from "./language-toggle";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, Heart, ArrowUpRight, ArrowRight, CalendarDays, Coffee, House, Truck, Flower2, Phone, Mail } from "lucide-react";
 import { BotanicalBranch } from "@/components/sol-illustrations";
@@ -13,7 +13,7 @@ const links = [
   { to: "/", label: "Home", detail: "A little sunshine starts here", icon: House },
   { to: "/menu", label: "Menu", detail: "Matcha, coffee & something special", icon: Coffee },
   { to: "/packages", label: "Experiences", detail: "Find your celebration’s perfect fit", icon: Flower2 },
-  { to: "/#delivery", label: "Delivery", detail: "Your favorite sips, brought to you", icon: Truck },
+  { to: "/delivery", label: "Delivery", detail: "Your favorite sips, brought to you", icon: Truck },
   { to: "/book", label: "Book Us", detail: "Let’s plan something lovely", icon: CalendarDays },
   { to: "/about", label: "Our story", detail: "Meet the heart behind Casa Sol", icon: Heart },
 ] as const;

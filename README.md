@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000. Routes: `/`, `/menu`, `/packages`, `/book`, `/about`. Delivery is featured at `/#delivery`; `/book?type=delivery#inquiry` opens the delivery inquiry.
+Open http://localhost:3000. Routes: `/`, `/menu`, `/packages`, `/delivery`, `/book`, `/about`. Delivery details live at `/delivery`; the legacy `/#delivery` link points to the homepage delivery introduction. `/book?type=delivery` preselects delivery. Page links open at the top instantly; in-page section links still work.
 
 ## Validate and deploy
 

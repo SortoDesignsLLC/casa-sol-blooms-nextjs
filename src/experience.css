@@ -1,5 +1,5 @@
 /* Casa Sol's menu, experiences, and inquiry pages share one editorial rhythm. */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 [id] { scroll-margin-top: 110px; }
 a, button, input, select, textarea, summary { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--sage); outline-offset: 5px; }

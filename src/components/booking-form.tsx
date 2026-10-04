@@ -4,7 +4,7 @@ import { translateValidation } from "@/lib/i18n/translations";
 import { LanguageToggle } from "./language-toggle";
 import { useLanguage } from "./language-provider";
 import { useRef, useState, type FormEvent, type ChangeEvent, type HTMLInputAutoCompleteAttribute } from "react";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowLeft, ArrowRight, Check, Copy, Mail, Plus, Sun, Trash2, CupSoda } from "lucide-react";
 import { SolMotion } from "@/components/sol-motion";
 import { SunMedallion, DrinkIllustration } from "@/components/sol-illustrations";

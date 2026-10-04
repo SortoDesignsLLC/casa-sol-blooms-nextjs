@@ -1,0 +1,159 @@
+.home { --home-space: clamp(64px, 7vw, 100px); }
+.home a:focus-visible { outline: 2px solid var(--accent-foreground); outline-offset: 6px; }
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  align-items: center;
+  gap: 4%;
+  min-height: min(700px, calc(100svh - 89px));
+  padding: 38px max(56px, calc((100vw - 1200px) / 2)) 68px;
+  background: linear-gradient(115deg, var(--surface-cream) 27%, var(--surface-blush) 100%);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 15px;
+  background: radial-gradient(ellipse at 50% 100%, var(--surface-cream) 70%, transparent 72%) 0 0 / 42px 20px repeat-x;
+}
+.heroCopy { position: relative; z-index: 2; animation: arrive 850ms ease both; }
+.logoLink { display: inline-block; }
+.logo { width: 290px; height: 197px; object-fit: contain; margin: -10px 0 20px; }
+.hero h1 { max-width: 530px; font-family: var(--font-display); font-weight: 500; font-size: clamp(36px, 3.65vw, 53px); line-height: 1.08; letter-spacing: -.04em; text-wrap: balance; }
+.hero h1 em { font-weight: 400; font-size: .84em; color: var(--accent-foreground); }
+.intro { max-width: 370px; margin-top: 22px; font-size: 14px; line-height: 1.8; color: var(--muted-foreground); }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 26px; margin-top: 28px; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 50px; padding: 14px 27px; border-radius: 50px; background: var(--accent-foreground); color: var(--surface-cream); font-size: 13px; transition: background 220ms, transform 220ms; }
+.button:hover { background: var(--foreground); transform: translateY(-3px); }
+.menuLink { display: inline-flex; align-items: center; gap: 12px; padding-block: 14px; border-bottom: 1px solid color-mix(in oklch, var(--foreground) 38%, transparent); font-size: 13px; }
+.menuLink svg { transition: transform 250ms; }
+.menuLink:hover svg { transform: translateX(4px); }
+.heroArt { position: relative; isolation: isolate; width: 100%; max-width: 550px; justify-self: center; animation: arrive 1000ms 100ms both; }
+.sunHalo { position: absolute; z-index: -1; width: 94%; aspect-ratio: 1; border-radius: 50%; background: color-mix(in oklch, var(--blush-soft) 65%, transparent); top: 13%; left: 3%; }
+.sunHalo::after { content: ""; position: absolute; inset: -16px; border: 1px solid color-mix(in oklch, var(--blush) 27%, transparent); border-radius: inherit; }
+.drinkCutouts { width: 100%; height: auto; position: relative; transform: rotate(-5deg); filter: drop-shadow(0 16px 17px oklch(.4 .03 40 / .06)); }
+.home .heroNote { position: relative; margin-top: 15px; padding-left: 20%; text-align: center; font-size: 31px; transform: rotate(-6deg); }
+.heroNote span { margin-left: 7px; }
+.heroBotanical { position: absolute; z-index: -1; right: -90px; bottom: 0; width: 340px; height: auto; opacity: .65; transform: rotate(-15deg); pointer-events: none; }
+.heroFootnote { position: absolute; bottom: 25px; left: max(56px, calc((100vw - 1200px) / 2)); color: var(--sage); font-size: 11px; letter-spacing: .06em; }
+.introduction { display: grid; grid-template-columns: .8fr 1fr; align-items: center; gap: 11%; max-width: 940px; padding-block: var(--home-space); }
+.founderPhoto { width: 100%; max-width: 290px; justify-self: center; position: relative; }
+.founderPhoto::before { content: ""; position: absolute; inset: 12px -13px 48px 12px; border: 1px solid var(--blush); border-radius: 48% 48% 12px 12px; transform: rotate(4deg); z-index: 0; opacity: .65; }
+.founderPhoto img { position: relative; width: 100%; height: 320px; object-fit: cover; object-position: center 28%; border-radius: 48% 48% 12px 12px; transform: rotate(-3deg); }
+.home .founderPhoto figcaption { margin-top: 19px; text-align: center; font-size: 27px; transform: rotate(-4deg); }
+.home .introductionCopy h2 { font-size: clamp(42px, 4vw, 58px); line-height: 1; margin-top: 19px; }
+.script { font-family: var(--font-script); font-weight: 400; font-size: 1.2em; letter-spacing: 0; color: var(--accent-foreground); }
+.introductionCopy > p:not(:global(.sol-label)) { max-width: 410px; font-size: 15px; line-height: 1.85; margin-top: 24px; color: var(--muted-foreground); }
+.introductionCopy :global(.sol-text-link) { margin-top: 17px; min-height: 44px; }
+.services { padding-block: 64px 72px; background: var(--surface-sage); border-block: 1px solid color-mix(in oklch, var(--sage-soft) 60%, transparent); }
+.servicesHeading { text-align: center; }
+.home .services h2 { font-size: clamp(40px, 4vw, 56px); margin-top: 10px; }
+.serviceList { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 42px; }
+.serviceList article { padding: 5px 38px 0; text-align: center; }
+.serviceList article + article { border-left: 1px solid color-mix(in oklch, var(--sage) 20%, transparent); }
+.serviceIcon { color: var(--sage); margin: 0 auto 20px; }
+.serviceList h3 { font-family: var(--font-display); font-size: clamp(27px, 2.5vw, 34px); font-weight: 500; line-height: 1.15; text-wrap: balance; }
+.serviceList p { font-size: 14px; line-height: 1.8; max-width: 295px; margin: 14px auto 0; color: var(--muted-foreground); }
+.serviceList :global(.sol-text-link) { margin-top: 15px; min-height: 44px; }
+.gallery { padding-block: var(--home-space) calc(var(--home-space) + 16px); }
+.galleryHeading { text-align: center; margin-bottom: 45px; }
+.home .galleryHeading h2 { font-size: clamp(42px, 4.5vw, 62px); margin-top: 12px; }
+.photos { display: grid; grid-template-columns: 1fr 1.07fr 1fr 1.07fr; align-items: start; gap: 25px; }
+.photos figure:nth-child(even) { padding-top: 42px; }
+.photoFrame { position: relative; overflow: hidden; border-radius: 140px 140px 8px 8px; aspect-ratio: 3 / 4; }
+.photos figure:nth-child(even) .photoFrame { border-radius: 8px; aspect-ratio: 4 / 5; }
+.photoFrame img { object-fit: cover; transition: transform 650ms cubic-bezier(.2,.65,.3,1); }
+.photoFrame:hover img { transform: scale(1.045); }
+.photos figure:nth-child(3) img { object-position: 50% 30%; }
+.home .photos figcaption { text-align: center; font-size: 26px; margin-top: 15px; transform: rotate(-3deg); }
+.photos figure:nth-child(even) figcaption { transform: rotate(3deg); }
+.contact { position: relative; isolation: isolate; text-align: center; padding: 60px 24px 52px; background: var(--surface-blush); border-radius: 50% 50% 0 0 / 35px 35px 0 0; }
+.contactSun { width: 53px; height: auto; margin: 0 auto 22px; color: var(--accent-foreground); }
+.home .contact h2 { font-size: clamp(44px, 4.8vw, 67px); line-height: 1.1; margin: 19px 0 28px; }
+.contact h2 em { font-family: var(--font-script); font-style: normal; letter-spacing: 0; color: var(--accent-foreground); }
+.contactBotanical { position: absolute; width: 300px; height: auto; bottom: 0; left: -65px; z-index: -1; opacity: .65; transform: scaleX(-1); pointer-events: none; }
+.contactLinks { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px 26px; margin-top: 28px; font-size: 13px; }
+.contactLinks a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; overflow-wrap: anywhere; transition: color 200ms; }
+.contactLinks a:hover { color: var(--accent-foreground); text-decoration: underline; text-underline-offset: 4px; }
+.welcome { font-family: var(--font-script); font-size: 25px; color: var(--accent-foreground); margin-top: 13px; }
+.home :global(.sol-motion-control) { padding: 10px 18px 20px; background: var(--surface-blush); }
+:global(body):has(.home) :global(footer) { margin-top: 0; }
+@keyframes arrive { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes reveal { from { transform: translateY(24px); } to { transform: translateY(0); } }
+.home[data-motion-paused="true"] * { animation: none !important; transition: none !important; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .introductionCopy, .galleryHeading, .photos figure { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 25%; }
+  }
+}
+@media (max-width: 1100px) and (min-width: 701px) {
+  .hero { padding: 32px 36px 60px; gap: 3%; min-height: 610px; }
+  .logo { width: 245px; height: 167px; margin-bottom: 16px; }
+  .hero h1 { font-size: 39px; }
+  .heroFootnote { left: 36px; }
+  .heroArt { max-width: 450px; }
+  .heroBotanical { width: 240px; right: -85px; }
+  .actions { gap: 20px; }
+  .serviceList article { padding-inline: 22px; }
+  .photos { gap: 18px; }
+  .contactBotanical { width: 220px; }
+}
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 24px 22px 35px; gap: 22px; }
+  .heroCopy { text-align: center; }
+  .logo { width: 164px; height: 112px; margin: 0 auto 14px; }
+  .hero h1 { font-size: clamp(30px, 7.8vw, 42px); max-width: 430px; margin: 0 auto; }
+  .hero h1 em { font-size: .85em; }
+  .intro { font-size: 13px; line-height: 1.7; max-width: 315px; margin: 15px auto 0; }
+  .actions { justify-content: center; gap: 23px; margin-top: 20px; }
+  .button { min-height: 46px; padding: 12px 23px; gap: 17px; font-size: 12px; }
+  .menuLink { font-size: 12px; gap: 8px; padding-block: 12px; }
+  .heroArt { width: min(78%, 310px); }
+  .sunHalo { width: 87%; top: 14%; left: 7%; }
+  .sunHalo::after { inset: -10px; }
+  .home .heroNote { font-size: 25px; margin-top: 6px; }
+  .heroBotanical { width: 160px; right: -45px; bottom: 45px; opacity: .65; }
+  .heroFootnote { position: static; text-align: center; font-size: 10px; margin-top: -7px; }
+  .introduction { grid-template-columns: 1fr; padding-block: 58px; gap: 35px; }
+  .founderPhoto { max-width: 230px; }
+  .founderPhoto img { height: 265px; }
+  .home .founderPhoto figcaption { font-size: 25px; }
+  .introductionCopy { text-align: center; }
+  .home .introductionCopy h2 { font-size: 44px; margin-top: 17px; }
+  .introductionCopy > p:not(:global(.sol-label)) { margin: 19px auto 0; max-width: 360px; font-size: 14px; }
+  .services { padding-block: 44px 46px; }
+  .serviceList { grid-template-columns: 1fr; margin-top: 26px; gap: 25px; }
+  .serviceList article { padding: 0 10px 24px; }
+  .serviceList article + article { border-left: 0; }
+  .serviceList article:not(:last-child) { border-bottom: 1px solid color-mix(in oklch, var(--sage) 20%, transparent); }
+  .serviceList article:last-child { padding-bottom: 0; }
+  .serviceIcon { width: 27px; height: 27px; margin-bottom: 13px; }
+  .serviceList h3 { font-size: 31px; }
+  .serviceList p { margin-top: 10px; }
+  .serviceList :global(.sol-text-link) { margin-top: 8px; }
+  .gallery { padding-block: 55px 64px; }
+  .galleryHeading { margin-bottom: 27px; }
+  .home .galleryHeading h2 { font-size: 42px; }
+  .photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 23px 16px; }
+  .photos figure:nth-child(even) { padding-top: 26px; }
+  .home .photos figcaption { font-size: 23px; margin-top: 11px; }
+  .contact { padding: 42px 22px 29px; border-radius: 50% 50% 0 0 / 20px 20px 0 0; }
+  .contactSun { width: 44px; margin-bottom: 17px; }
+  .home .contact h2 { font-size: clamp(39px, 10vw, 51px); }
+  .contactLinks { flex-direction: column; gap: 0; margin-top: 21px; font-size: 12px; }
+  .contactBotanical { width: 160px; left: -77px; opacity: .5; }
+  .welcome { font-size: 23px; }
+}
+@media (max-width: 400px) {
+  .hero { padding-top: 17px; gap: 18px; }
+  .logo { width: 144px; height: 98px; margin-bottom: 11px; }
+  .heroArt { width: 68%; }
+  .hero h1 { font-size: 31px; }
+  .intro { margin-top: 12px; }
+  .actions { margin-top: 17px; gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home *, .home *::before, .home *::after { animation: none !important; transition: none !important; }
+}

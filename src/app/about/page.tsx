@@ -1,7 +1,7 @@
 import { localizeMetadata } from "@/lib/i18n/metadata";
 import { getTranslations } from "@/lib/i18n/server";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowRight } from "lucide-react";
 import { SolMotion } from "@/components/sol-motion";
 import { SolBackground } from "@/components/sol-background";

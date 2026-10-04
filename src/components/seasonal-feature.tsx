@@ -1,5 +1,5 @@
 import { getTranslations } from "@/lib/i18n/server";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowRight } from "lucide-react";
 import { seasonal } from "@/data/menu";
 import { DrinkIllustration } from "@/components/sol-illustrations";
@@ -48,7 +48,7 @@ export async function SeasonalFeature({ preview = false }: { preview?: boolean }
         <div className={styles.menuIntro}><span className={styles.seasonStamp}>{t("Only for")}<br /><em>{t("the season")}</em><span aria-hidden="true">✦</span></span><p>{t("Four cozy pours. Pumpkin, warm spice, and the homemade touches you love — here for a little while.")}</p></div>
       </div>
       <div className={styles.drinks}>{seasonal.map((item) => <article className={styles.drink} key={item.name}><div className={styles.drinkArt}><DrinkIllustration name={item.name} context="fall-menu" /></div><p className={styles.drinkCategory}>{t(item.category || "")}</p><h2>{item.name}</h2><p className={styles.description}>{t(item.description)}</p></article>)}</div>
-      <div className={styles.menuFooter}><p>{t("Here for fall. Savor it while it’s here.")}<small>{t("Seasonal availability is confirmed with your inquiry.")}</small></p><Link href="/book#inquiry" className={styles.button}>{t("Ask about fall flavors ")}<ArrowRight size={17} /></Link></div>
+      <div className={styles.menuFooter}><p>{t("Here for fall. Savor it while it’s here.")}<small>{t("Seasonal availability is confirmed with your inquiry.")}</small></p><Link href="/book" className={styles.button}>{t("Ask about fall flavors ")}<ArrowRight size={17} /></Link></div>
     </div>
   </section>;
 }

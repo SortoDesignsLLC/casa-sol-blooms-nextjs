@@ -1,7 +1,7 @@
 import { localizeMetadata } from "@/lib/i18n/metadata";
 import { getTranslations } from "@/lib/i18n/server";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowRight } from "lucide-react";
 import { SolMotion } from "@/components/sol-motion";
 import { sharedOpenGraph } from "@/lib/metadata";
@@ -33,7 +33,7 @@ export default async function MenuPage() {
         </div>
       </section>)}
     </div>
-    <section className="sol-quiet-cta sol-wrap"><div><p className="eyebrow">{t("Your favorites, your way")}</p><h2>{t("For your gathering.")}<br /><em>{t("Or your everyday.")}</em></h2></div><div><p>{t("Explore beverage catering for your next celebration, or have freshly prepared 20-ounce drinks delivered to you.")}</p><div className="sol-actions"><Link href="/packages" className="sol-button">{t("Explore packages ")}<ArrowRight size={16} /></Link><Link href="/book?type=delivery#inquiry" className="sol-text-link">{t("Ask about delivery ")}<ArrowRight size={16} /></Link></div></div></section>
+    <section className="sol-quiet-cta sol-wrap"><div><p className="eyebrow">{t("Your favorites, your way")}</p><h2>{t("For your gathering.")}<br /><em>{t("Or your everyday.")}</em></h2></div><div><p>{t("Explore beverage catering for your next celebration, or have freshly prepared 20-ounce drinks delivered to you.")}</p><div className="sol-actions"><Link href="/packages" className="sol-button">{t("Explore packages ")}<ArrowRight size={16} /></Link><Link href="/book?type=delivery" className="sol-text-link">{t("Ask about delivery ")}<ArrowRight size={16} /></Link></div></div></section>
   </SolMotion>;
 }
 

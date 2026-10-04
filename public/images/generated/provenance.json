@@ -1,0 +1,34 @@
+{
+  "tool": "Built-in image_gen",
+  "purpose": "Casa Sol homepage decorative cutouts and styled product imagery",
+  "assets": [
+    {
+      "name": "drink-cutouts",
+      "prompt": "Use case: product-mockup / background-extraction. Create a premium photorealistic website hero cutout inspired by these Casa Sol references. Reference 1 defines the actual clear tapered plastic drink cup, pink straw and lid; reference 2 is the exact Casa Sol logo to reproduce on the labels; reference 3 defines the strawberry and pineapple layered iced matcha drinks. Show two complete cups, one strawberry matcha slightly forward on the left and one pineapple matcha slightly behind on the right, both with creamy pale pink cold foam, clear lids and slim pink straws. Elegant realistic small cream labels bearing the Casa Sol logo from reference 2 with the same pink serif lettering and olive sun, no other label copy. Condensation, natural delicious fruit layers, beautiful soft daylight, editorial food photograph, gentle dimensionality. Upright cups, very slight natural opposing angles, bases aligned near bottom. Entire cups and straws fully visible, tightly composed pair, 5% clear margin around objects. True transparent alpha background, no table, no wall, no hands, no people, no opaque background, no checkerboard pattern, no floating ingredients, no extra text. Grounding shadows only faint and translucent. The intended page background is warm pale cream.",
+      "transparent_background": true,
+      "references": [
+        "IMG_3550.jpg",
+        "casa-sol-logo-full.jpg",
+        "drinks.jpg"
+      ],
+      "file": "casa-sol-drink-cutouts.png"
+    },
+    {
+      "name": "botanical-corner",
+      "prompt": "Use case: illustration-story. A single airy botanical corner ornament for a refined warm Casa Sol matcha and coffee website. Fine translucent watercolor and delicate colored pencil on genuinely transparent background: one gracefully curving tea branch with muted sage and olive leaves, a few tiny blush pink cosmos flowers and warm ivory blossoms. Asymmetric diagonal arrangement growing from lower right toward upper left. Lots of transparent air between stems. Soft hand-painted botanical study, quiet sunlit romantic mood, organic irregular contours, exquisite fine detail but restrained. No container, no text, no logo, no sun drawing, no border, no paper rectangle, no background wash, no cast shadows, no checkerboard. All perimeter and spaces between flowers true alpha transparency. Suitable to place subtly in page corners.",
+      "transparent_background": true,
+      "file": "casa-sol-botanical.png"
+    },
+    {
+      "name": "sunny-sips",
+      "prompt": "Use case: product-mockup. Create a styled editorial gallery photograph for the Casa Sol matcha and coffee brand using the provided references. Keep the real cup shape from reference 1 and place the exact pink-and-olive Casa Sol logo from reference 2 on a small cream cup sticker; reference 3 defines the natural strawberry matcha ingredients. Portrait 4:5 composition, close-up of a single clear takeaway strawberry iced matcha with pink cold foam and a slim pink straw, complete cup visible. Resting on softly rumpled blush pink linen on a warm cream table, a fresh halved strawberry beside it and a small understated ivory flower stem near the edge. Dappled late-morning sunlight, beautifully controlled natural shadow, candid film-like food photography, shallow depth of field, warm but clean white balance, tactile linen and real condensation. Drink has strawberry red puree at base, creamy ivory milk, rich natural matcha green above, thin pink foam top. No people, no event, no hands, no invented venue, no typography outside the small Casa Sol logo sticker, no collage, no graphic overlays. Calm sophisticated composition with cup as unmistakable hero.",
+      "transparent_background": false,
+      "references": [
+        "IMG_3550.jpg",
+        "casa-sol-logo-full.jpg",
+        "drinks.jpg"
+      ],
+      "file": "casa-sol-sunny-sips.png"
+    }
+  ]
+}
