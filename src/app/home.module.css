@@ -101,21 +101,22 @@
   .contactBotanical { width: 220px; }
 }
 @media (max-width: 700px) {
-  .hero { grid-template-columns: 1fr; min-height: auto; padding: 24px 22px 35px; gap: 22px; }
+  .hero { grid-template-columns: 1fr; align-content: center; min-height: calc(100svh - 81px); padding: 22px 22px 26px; gap: 18px; }
   .heroCopy { text-align: center; }
-  .logo { width: 164px; height: 112px; margin: 0 auto 14px; }
+  .logoLink { display: none; }
   .hero h1 { font-size: clamp(30px, 7.8vw, 42px); max-width: 430px; margin: 0 auto; }
   .hero h1 em { font-size: .85em; }
-  .intro { font-size: 13px; line-height: 1.7; max-width: 315px; margin: 15px auto 0; }
-  .actions { justify-content: center; gap: 23px; margin-top: 20px; }
+  .intro { font-size: 13px; line-height: 1.7; max-width: 315px; margin: 12px auto 0; }
+  .actions { justify-content: center; gap: 23px; margin-top: 17px; }
   .button { min-height: 46px; padding: 12px 23px; gap: 17px; font-size: 12px; }
   .menuLink { font-size: 12px; gap: 8px; padding-block: 12px; }
-  .heroArt { width: min(78%, 310px); }
+  /* Account for browser chrome through svh; keep complete cups above the fold. */
+  .heroArt { width: min(70vw, max(140px, calc((100svh - 380px) * .8)), 280px); }
   .sunHalo { width: 87%; top: 14%; left: 7%; }
   .sunHalo::after { inset: -10px; }
-  .home .heroNote { font-size: 25px; margin-top: 6px; }
-  .heroBotanical { width: 160px; right: -45px; bottom: 45px; opacity: .65; }
-  .heroFootnote { position: static; text-align: center; font-size: 10px; margin-top: -7px; }
+  .home .heroNote { width: max-content; left: 50%; padding-left: 0; font-size: 24px; margin-top: 8px; white-space: nowrap; transform: translateX(-50%) rotate(-6deg); }
+  .heroBotanical { width: 130px; right: -55px; bottom: 30px; opacity: .5; }
+  .heroFootnote { display: none; }
   .introduction { grid-template-columns: 1fr; padding-block: 58px; gap: 35px; }
   .founderPhoto { max-width: 230px; }
   .founderPhoto img { height: 265px; }
@@ -147,9 +148,7 @@
   .welcome { font-size: 23px; }
 }
 @media (max-width: 400px) {
-  .hero { padding-top: 17px; gap: 18px; }
-  .logo { width: 144px; height: 98px; margin-bottom: 11px; }
-  .heroArt { width: 68%; }
+  .hero { padding-block: 18px 24px; gap: 15px; }
   .hero h1 { font-size: 31px; }
   .intro { margin-top: 12px; }
   .actions { margin-top: 17px; gap: 18px; }

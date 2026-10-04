@@ -104,7 +104,7 @@ export function SiteNav() {
       </div>
     </dialog>
 
-    {pathname !== "/book" && <nav aria-label={t("Quick actions")} className={styles.actionBar}>
+    {pathname !== "/book" && pathname !== "/" && <nav aria-label={t("Quick actions")} className={styles.actionBar}>
       <Link href="/book" className={styles.actionPrimary}><CalendarDays size={19} strokeWidth={1.6} aria-hidden="true" /><span>{t("Plan your event")}</span><ArrowRight size={17} aria-hidden="true" /></Link>
       <a href="tel:3018353714" className={styles.actionSecondary}><Phone size={18} strokeWidth={1.6} aria-hidden="true" /><span>{t("Call us")}</span></a>
     </nav>}

@@ -45,7 +45,7 @@ export default async function Home() {
       </div>
       <figure className={styles.heroArt}>
         <span className={styles.sunHalo} aria-hidden="true" />
-        <Image className={styles.drinkCutouts} src="/images/generated/casa-sol-drink-cutouts.png" alt={t("Strawberry and pineapple matcha with pink cold foam in Casa Sol cups")} width={1217} height={1293} sizes="(max-width: 700px) 78vw, (max-width: 1100px) 48vw, 550px" loading="eager" fetchPriority="high" />
+        <Image className={styles.drinkCutouts} src="/images/generated/casa-sol-drink-cutouts.png" alt={t("Strawberry and pineapple matcha with pink cold foam in Casa Sol cups")} width={1217} height={1293} sizes="(max-width: 700px) 280px, (max-width: 1100px) 48vw, 550px" loading="eager" fetchPriority="high" />
         <figcaption className={styles.heroNote}>{t("love is brewing")} <span aria-hidden="true">♡</span></figcaption>
       </figure>
       <p className={styles.heroFootnote} lang="es">Un poquito de sol para todos.</p>
