@@ -18,6 +18,29 @@ const links = [
   { to: "/about", label: "Our story", detail: "Meet the heart behind Casa Sol", icon: Heart },
 ] as const;
 
+function MobileQuickActions({ pathname }: { pathname: string }) {
+  const { t } = useLanguage();
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const hero = document.getElementById("home-hero");
+    if (!hero) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setPastHero(!entry.isIntersecting && entry.boundingClientRect.bottom <= 0);
+    });
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  if (pathname === "/book" || (pathname === "/" && !pastHero)) return null;
+
+  return <nav aria-label={t("Quick actions")} className={styles.actionBar}>
+    <Link href="/book" className={styles.actionPrimary}><CalendarDays size={19} strokeWidth={1.6} aria-hidden="true" /><span>{t("Plan your event")}</span><ArrowRight size={17} aria-hidden="true" /></Link>
+    <a href="tel:3018353714" className={styles.actionSecondary}><Phone size={18} strokeWidth={1.6} aria-hidden="true" /><span>{t("Call us")}</span></a>
+  </nav>;
+}
+
 export function SiteNav() {
   const { t } = useLanguage();
   const pathname = usePathname();
@@ -104,9 +127,6 @@ export function SiteNav() {
       </div>
     </dialog>
 
-    {pathname !== "/book" && pathname !== "/" && <nav aria-label={t("Quick actions")} className={styles.actionBar}>
-      <Link href="/book" className={styles.actionPrimary}><CalendarDays size={19} strokeWidth={1.6} aria-hidden="true" /><span>{t("Plan your event")}</span><ArrowRight size={17} aria-hidden="true" /></Link>
-      <a href="tel:3018353714" className={styles.actionSecondary}><Phone size={18} strokeWidth={1.6} aria-hidden="true" /><span>{t("Call us")}</span></a>
-    </nav>}
+    <MobileQuickActions key={pathname} pathname={pathname} />
   </>;
 }

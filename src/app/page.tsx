@@ -32,7 +32,7 @@ const moments = [
 export default async function Home() {
   const t = await getTranslations();
   return <SolMotion className={styles.home}>
-    <section className={styles.hero} aria-labelledby="hero-title">
+    <section id="home-hero" className={styles.hero} aria-labelledby="hero-title">
       <Image className={styles.heroBotanical} src="/images/generated/casa-sol-botanical.png" alt="" width={1218} height={1292} sizes="(max-width: 700px) 160px, 360px" aria-hidden="true" />
       <div className={styles.heroCopy}>
         <Link href="/" aria-label={t("Casa Sol home")} className={styles.logoLink}><img className={styles.logo} src="/images/casa-sol-logo-transparent.png" alt="Casa Sol Matcha & Coffee" width={420} height={290} /></Link>
