@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { inquiryMessage, inquirySchema } from "../../../lib/inquiry";
+import { inquirySchema } from "../../../lib/inquiry";
+import { inquiryEmailOrigin, inquiryEmails } from "../../../lib/inquiry-emails";
 import { contactEmail } from "../../../data/experiences";
 
 export const runtime = "nodejs";
@@ -40,17 +41,23 @@ export async function POST(request: Request) {
   if (attempts.size >= 10000 && !recent) return Response.json({ error: "Please try again shortly" }, { status: 429 });
   attempts.set(ip, { count: (recent?.count || 0) + 1, expires: recent?.expires || now + 60000 });
 
-  const message = inquiryMessage(parsed.data);
   try {
-    const result = await fetch("https://api.resend.com/emails", {
+    const emails = inquiryEmails(parsed.data, inquiryEmailOrigin());
+    const result = await fetch("https://api.resend.com/emails/batch", {
       method: "POST",
-      headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json", "Idempotency-Key": "casa-sol-inquiry/" + envelope.data.requestId },
-      body: JSON.stringify({ from, to: [contactEmail], reply_to: parsed.data.email, subject: message.subject, text: message.text }),
+      headers: { Authorization: "Bearer " + apiKey, "Content-Type": "application/json", "Idempotency-Key": "casa-sol-inquiry-pair/" + envelope.data.requestId },
+      body: JSON.stringify([
+        { from, to: [contactEmail], reply_to: parsed.data.email, ...emails.owner },
+        { from, to: [parsed.data.email], reply_to: contactEmail, ...emails.customer },
+      ]),
       signal: AbortSignal.timeout(10000),
     });
-    if (!result.ok) return Response.json({ error: "Could not confirm submission" }, { status: 502 });
-    const receipt = await result.json();
-    if (!receipt.id) return Response.json({ error: "Could not confirm submission" }, { status: 502 });
+    if (!result.ok) {
+      console.error("Inquiry email batch rejected", { status: result.status });
+      return Response.json({ error: "Could not confirm submission" }, { status: 502 });
+    }
+    const receipt = z.object({ data: z.array(z.object({ id: z.string().min(1) })).length(2) }).safeParse(await result.json());
+    if (!receipt.success) return Response.json({ error: "Could not confirm submission" }, { status: 502 });
     return Response.json({ sent: true });
   } catch {
     return Response.json({ error: "Could not confirm submission" }, { status: 502 });

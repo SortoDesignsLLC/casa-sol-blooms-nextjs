@@ -9,14 +9,14 @@
 .photo figcaption { font-family: var(--font-display); font-style: italic; font-size: 20px; text-align: center; margin-top: 12px; color: #646954; }
 .asideNote { display: flex; gap: 12px; font-size: 12px; line-height: 1.6; margin-top: 28px; padding-top: 23px; border-top: 1px solid #dcded0; }
 .asideNote svg { flex-shrink: 0; color: #6d785e; }
-.asideNote small { display: block; font-size: 11px; color: #646954; margin-top: 3px; }
+.asideNote small { display: block; font-size: 12px; color: #646954; margin-top: 3px; }
 .email { display: inline-flex; align-items: center; gap: 9px; font-size: 12px; margin: 18px 0 0 32px; border-bottom: 1px solid #b3b9a1; padding-bottom: 3px; }
 .workspace { min-width: 0; scroll-margin-top: 110px; }
 .toolbar { display: flex; justify-content: space-between; gap: 10px; align-items: center; padding-bottom: 22px; }
 .progress { border-block: 1px solid #dcded0; padding-block: 17px; }
 .progress ol { display: flex; list-style: none; margin: 0; padding: 0; justify-content: space-between; gap: 8px; }
-.progress button { display: flex; align-items: center; gap: 7px; font-size: 11px; min-height: 35px; color: #69705e; }
-.progress button > span { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid #c9cebc; border-radius: 50%; font-size: 10px; }
+.progress button { display: flex; align-items: center; gap: 7px; font-size: 12px; min-height: 35px; color: #69705e; }
+.progress button > span { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid #c9cebc; border-radius: 50%; font-size: 12px; }
 .progress button[aria-current="step"] { color: #35462f; font-weight: 600; }
 .progress button[aria-current="step"] > span { background: #536348; color: #fffdf6; border-color: #536348; }
 .progress button[data-complete="true"] > span { background: #e4e9d8; border-color: #e4e9d8; color: #3b5032; }
@@ -34,8 +34,8 @@
 .choices button > svg { width: 60px; height: 60px; color: #748062; margin-bottom: 8px; }
 .choices button:nth-child(2) > svg { width: 65px; height: 65px; margin-block: -3px 6px; }
 .choices strong { font-size: 23px; font-family: var(--font-display); font-weight: 600; }
-.choices span { font-size: 11px; margin-top: 6px; line-height: 1.55; }
-.choices small { font-size: 10px; color: #646954; margin-top: 10px; }
+.choices span { font-size: 12px; margin-top: 6px; line-height: 1.55; }
+.choices small { font-size: 12px; color: #646954; margin-top: 10px; }
 .choices i { position: absolute; right: 15px; top: 17px; width: 19px; height: 19px; border: 1px solid #a4ae95; border-radius: 50%; display: grid; place-items: center; }
 .choices [aria-pressed="true"] i { background: #536348; border-color: #536348; color: white; }
 .packageGroup { margin-top: 28px; }
@@ -46,10 +46,10 @@
 .packages input { accent-color: #536348; width: 15px; height: 15px; flex-shrink: 0; }
 .packages label > span:first-of-type { flex: 1; }
 .packages strong { font-weight: 500; font-size: 14px; }
-.packages small { display: block; font-size: 11px; line-height: 1.5; color: #646954; margin-top: 3px; }
+.packages small { display: block; font-size: 12px; line-height: 1.5; color: #646954; margin-top: 3px; }
 .price { font-family: var(--font-display); font-size: 25px; display: flex; gap: 5px; align-items: baseline; }
 .price small { font-family: var(--font-body); }
-.packageHint { font-size: 11px; line-height: 1.8; color: #646954; margin: 12px 0 17px; }
+.packageHint { font-size: 12px; line-height: 1.8; color: #646954; margin: 12px 0 17px; }
 .deliveryNote { margin-top: 26px; display: flex; gap: 16px; background: #f4ece5; padding: 18px; border-radius: 18px; }
 .deliveryNote svg { flex-shrink: 0; }
 .deliveryNote strong { font-family: var(--font-display); font-size: 23px; font-weight: 500; }
@@ -70,15 +70,15 @@
 .review section { padding-top: 15px; border-top: 1px solid #dcded0; min-width: 0; }
 .review section > div { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
 .page .review h3 { font-size: 22px; font-family: var(--font-display); font-weight: 500; line-height: 1.2; }
-.review button { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; min-height: 36px; border-bottom: 1px solid #b3b9a1; }
+.review button { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; min-height: 36px; border-bottom: 1px solid #b3b9a1; }
 .review p { font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; white-space: pre-line; }
 .feeNote { font-size: 12px; line-height: 1.8; padding: 18px; background: #eff1e5; margin-top: 24px; }
 .actions { display: flex; justify-content: space-between; align-items: center; gap: 15px; border-top: 1px solid #dcded0; padding-top: 23px; margin-top: 26px; }
 .actions :global(.sol-button) { background: #536348; color: #fffdf6; padding: 15px 25px; min-height: 49px; font-size: 12px; }
 .actions :global(.sol-button):hover { background: #3d4d34; }
 .back { display: inline-flex; gap: 9px; align-items: center; font-size: 12px; min-height: 44px; }
-.noPayment { font-size: 11px; color: #646954; }
-.bottomNote { font-size: 10px; color: #646954; line-height: 1.7; max-width: 420px; margin-top: 15px; }
+.noPayment { font-size: 12px; color: #646954; }
+.bottomNote { font-size: 12px; color: #646954; line-height: 1.7; max-width: 420px; margin-top: 15px; }
 .page button:focus-visible, .page a:focus-visible, .packages label:has(input:focus-visible) { outline: 2px solid #536348; outline-offset: 4px; }
 .page button:disabled { cursor: default; }
 @keyframes arrive { from { opacity: .5; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
@@ -86,8 +86,8 @@
   .layout { grid-template-columns: 260px minmax(0, 1fr); gap: 40px; }
   .aside h1 { font-size: 40px; }
   .photo img { height: 290px; }
-  .toolbar > span { font-size: 9px; }
-  .progress button { flex-direction: column; gap: 6px; font-size: 10px; }
+  .toolbar > span { font-size: 11px; }
+  .progress button { flex-direction: column; gap: 6px; font-size: 12px; }
   .page .heading h2 { font-size: 34px; }
   .choices button { padding-inline: 14px; }
 }
@@ -107,11 +107,11 @@
 @media (max-width: 480px) {
   .layout { width: calc(100% - 36px); }
   .aside h1 { font-size: 35px; }
-  .aside > p:first-child { font-size: 10px; }
+  .aside > p:first-child { font-size: 12px; }
   .toolbar > span { font-size: 8px; letter-spacing: .12em; }
   .progress { padding-block: 12px; }
   .progress ol { gap: 5px; }
-  .progress button { font-size: 9px; }
+  .progress button { font-size: 11px; }
   .heading > p:last-child { font-size: 12px; }
   .page .heading h2 { font-size: 31px; scroll-margin-top: 95px; }
   .choices { gap: 9px; }
@@ -119,15 +119,15 @@
   .choices button > svg { width: 47px; height: 47px; }
   .choices button:nth-child(2) > svg { width: 50px; height: 50px; }
   .choices strong { font-size: 19px; line-height: 1.15; min-height: 44px; }
-  .choices span { font-size: 11px; }
-  .choices small { font-size: 9px; line-height: 1.6; }
+  .choices span { font-size: 12px; }
+  .choices small { font-size: 11px; line-height: 1.6; }
   .choices i { right: 12px; top: 13px; width: 17px; height: 17px; }
   .packageGroup > legend { font-size: 24px; }
   .packages strong { font-size: 13px; }
   .price { font-size: 23px; }
   .review { grid-template-columns: 1fr; gap: 18px; }
   .actions { gap: 10px; }
-  .actions :global(.sol-button) { padding-inline: 18px; font-size: 11px; }
+  .actions :global(.sol-button) { padding-inline: 18px; font-size: 12px; }
   .form :global(.sol-field-grid) { gap: 17px; }
 }
 @media (prefers-reduced-motion: reduce) { .stage { animation: none; } .choices button { transition: none; } }
@@ -150,7 +150,7 @@
 /* Casa Sol's illustrated welcome: warm paper, soft clouds, and a little blush. */
 .welcome { position: relative; isolation: isolate; min-height: 155px; display: grid; place-items: center; padding: 26px 260px 36px; background: #f4e8df; overflow: hidden; }
 .welcomeCopy { position: relative; z-index: 1; text-align: center; }
-.welcomeCopy > p { font-size: 9px; color: #73594f; }
+.welcomeCopy > p { font-size: 11px; color: #73594f; }
 .page .welcome h1 { font-family: var(--font-display); font-size: clamp(37px, 3.5vw, 50px); line-height: 1.15; font-weight: 500; margin-top: 10px; letter-spacing: -.035em; }
 .page .welcome h1 em { font-family: var(--font-script); font-size: 1.18em; font-style: normal; color: #926071; letter-spacing: 0; white-space: nowrap; }
 .cloudLeft, .cloudRight { position: absolute; width: 235px; pointer-events: none; animation: cloudDrift 9s ease-in-out infinite alternate; }

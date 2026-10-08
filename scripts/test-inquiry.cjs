@@ -13,6 +13,7 @@ require.extensions[".ts"] = (module, filename) => {
 };
 const { inquirySchema, inquiryMessage, inquiryMailto, daysUntil, todayISO } = require("../src/lib/inquiry.ts");
 const { POST } = require("../src/app/api/inquiry/route.ts");
+const { inquiryEmails, inquiryEmailOrigin } = require("../src/lib/inquiry-emails.ts");
 
 const base = {
   name: "Test Guest", email: "guest@example.com", phone: "202-555-0100", language: "en",
@@ -24,10 +25,13 @@ const delivery = { ...base, kind: "delivery", business: "Example Office, floor 2
 const oldFetch = global.fetch;
 const oldKey = process.env.RESEND_API_KEY;
 const oldFrom = process.env.INQUIRY_FROM_EMAIL;
+const oldSite = process.env.SITE_URL;
+process.env.SITE_URL = "https://casasol.example";
 after(() => {
   global.fetch = oldFetch;
   if (oldKey === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = oldKey;
   if (oldFrom === undefined) delete process.env.INQUIRY_FROM_EMAIL; else process.env.INQUIRY_FROM_EMAIL = oldFrom;
+  if (oldSite === undefined) delete process.env.SITE_URL; else process.env.SITE_URL = oldSite;
   if (previousLoader) require.extensions[".ts"] = previousLoader; else delete require.extensions[".ts"];
 });
 
@@ -112,22 +116,94 @@ test("provider errors and missing receipts do not claim the inquiry was sent", a
   assert.equal((await POST(request())).status, 502);
 });
 
-test("successful delivery is addressed only to the owner with reply-to and retry protection", async () => {
+test("successful delivery sends private owner and client emails with opposite reply-to addresses", async () => {
   process.env.RESEND_API_KEY = "test-only";
   process.env.INQUIRY_FROM_EMAIL = "Casa Sol <inquiries@example.com>";
   let captured;
   global.fetch = async (url, options) => {
     captured = { url, options, body: JSON.parse(options.body) };
-    return Response.json({ id: "test-receipt" });
+    return Response.json({ data: [{ id: "owner-receipt" }, { id: "client-receipt" }] });
   };
   const result = await POST(request(delivery));
   assert.equal(result.status, 200);
   assert.deepEqual(await result.json(), { sent: true });
-  assert.equal(captured.url, "https://api.resend.com/emails");
-  assert.deepEqual(captured.body.to, ["casasolmatchacoffee@gmail.com"]);
-  assert.equal(captured.body.reply_to, "guest@example.com");
-  assert.match(captured.options.headers["Idempotency-Key"], /^casa-sol-inquiry\//);
-  assert.match(captured.body.text, /Total drinks: 5/);
+  assert.equal(captured.url, "https://api.resend.com/emails/batch");
+  assert.equal(captured.body.length, 2);
+  const [owner, client] = captured.body;
+  assert.deepEqual(owner.to, ["casasolmatchacoffee@gmail.com"]);
+  assert.equal(owner.reply_to, "guest@example.com");
+  assert.deepEqual(client.to, ["guest@example.com"]);
+  assert.equal(client.reply_to, "casasolmatchacoffee@gmail.com");
+  assert.match(captured.options.headers["Idempotency-Key"], /^casa-sol-inquiry-pair\//);
+  for (const email of [owner, client]) {
+    assert.equal(email.from, process.env.INQUIRY_FROM_EMAIL);
+    assert.equal(email.cc, undefined);
+    assert.match(email.text, /Total drinks: 5/);
+    assert.match(email.html, /https:\/\/casasol.example\/images\/casa-sol-logo-full.jpg/);
+  }
+  assert.match(client.html, /images\/drinks.jpg/);
+  assert.match(client.text, /What happens next/);
+  assert.match(client.text, /not a confirmed order/);
+  assert.doesNotMatch(client.text, /50% deposit/);
+});
+
+test("both provider receipts are required, including on HTTP 200 responses", async () => {
+  for (const payload of [{ data: [{ id: "owner-only" }] }, { data: [{ id: "owner" }, {}] }, { data: [{ id: "owner" }, { id: "" }] }]) {
+    global.fetch = async () => Response.json(payload);
+    assert.equal((await POST(request())).status, 502);
+  }
+});
+
+test("retrying a timed-out request reuses the exact batch and idempotency key", async () => {
+  const initial = request();
+  const retry = initial.clone();
+  const attempts = [];
+  global.fetch = async (_url, options) => {
+    attempts.push(options);
+    if (attempts.length === 1) throw new Error("Response lost");
+    return Response.json({ data: [{ id: "owner" }, { id: "client" }] });
+  };
+  assert.equal((await POST(initial)).status, 502);
+  assert.equal((await POST(retry)).status, 200);
+  assert.equal(attempts[0].headers["Idempotency-Key"], attempts[1].headers["Idempotency-Key"]);
+  assert.equal(attempts[0].body, attempts[1].body);
+});
+
+test("email templates preserve every event detail, escape visitor HTML, and localize both languages", () => {
+  for (const language of ["en", "es"]) {
+    const data = inquirySchema(language).parse({ ...event, language, name: 'Alex <img src=x onerror="alert(1)">', notes: "First line\n<script>bad</script> & more" });
+    const emails = inquiryEmails(data, "https://casasol.example");
+    for (const email of [emails.owner, emails.customer]) {
+      for (const value of [data.email, data.phone, data.address, data.city, data.zip, "31", "5", "Sol Social", "Fresa Fresca", "Matcha"]) assert.ok(email.html.includes(value), value);
+      assert.match(email.html, /&lt;img src=x onerror=&quot;alert\(1\)&quot;&gt;/);
+      assert.match(email.html, /First line<br>&lt;script&gt;bad&lt;\/script&gt; &amp; more/);
+      assert.doesNotMatch(email.html, /<script>|<img src=x/);
+      assert.match(email.html, new RegExp(`lang="${language}"`));
+    }
+    assert.match(emails.customer.text, language === "es" ? /depósito del 50%/ : /50% deposit/);
+    assert.match(emails.customer.text, language === "es" ? /no una reserva confirmada/ : /not a confirmed booking/);
+    assert.match(emails.customer.html, language === "es" ? /Los próximos pasos/ : /What happens next/);
+  }
+});
+
+test("Spanish delivery receipt includes flavor quantities, business, and delivery-specific next steps", () => {
+  const emails = inquiryEmails(inquirySchema("es").parse({ ...delivery, language: "es" }), "https://casasol.example");
+  for (const email of [emails.owner, emails.customer]) {
+    assert.match(email.text, /Fresa Fresca: 3 × 20 oz/);
+    assert.match(email.text, /Nube de Caramelo: 2 × 20 oz/);
+    assert.match(email.text, /Total de bebidas: 5/);
+    assert.match(email.text, /Example Office, floor 2/);
+  }
+  assert.match(emails.customer.text, /confirmaremos tu entrega/);
+  assert.doesNotMatch(emails.customer.text, /depósito del 50%/);
+});
+
+test("email URLs use the configured origin and reject unsafe URL schemes", () => {
+  process.env.SITE_URL = "https://casasol.example/path";
+  assert.equal(inquiryEmailOrigin(), "https://casasol.example");
+  process.env.SITE_URL = "javascript://bad";
+  assert.throws(inquiryEmailOrigin);
+  process.env.SITE_URL = "https://casasol.example";
 });
 
 test("guided steps validate the current choice without blocking on later contact fields", () => {

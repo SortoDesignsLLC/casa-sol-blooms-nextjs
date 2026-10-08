@@ -90,6 +90,8 @@ export default function BookingForm({ initialKind, initialPackage, initialSetup,
         body: JSON.stringify({ inquiry: parsed.data, requestId: requestRef.current.id }),
       });
       if (!response.ok) throw new Error("Inquiry could not be submitted");
+      const receipt = await response.json();
+      if (receipt.sent !== true) throw new Error("Inquiry receipt missing");
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -240,7 +242,7 @@ export default function BookingForm({ initialKind, initialPackage, initialSetup,
           </fieldset>
         </form>
         <div ref={resultRef} tabIndex={-1} role="status" className={status === "sent" || status === "draft" || status === "error" ? "sol-inquiry-result" : "sr-only"}>
-          {status === "sent" && <><Sun size={30} strokeWidth={1} /><h3>{t("Your inquiry is on its way!", "¡Tu consulta está en camino!")}</h3><p>{t("Thank you for thinking of Casa Sol. We’ll review your details and be in touch within 2–3 business days.", "Gracias por pensar en Casa Sol. Revisaremos tus detalles y te contactaremos dentro de 2–3 días hábiles.")}</p></>}
+          {status === "sent" && <><Sun size={30} strokeWidth={1} /><h3>{t("Your inquiry is on its way!", "¡Tu consulta está en camino!")}</h3><p>{t("We’ve sent a copy of your request and next steps to ", "Enviamos una copia de tu solicitud y los próximos pasos a ")}<strong>{prepared?.email}</strong>. {t("We’ll review your details and be in touch within 2–3 business days. If you don’t see your email, check your spam folder.", "Revisaremos tus detalles y te contactaremos dentro de 2–3 días hábiles. Si no ves el correo, revisa tu carpeta de spam.")}</p><p className="sol-small-note">{t("Your request is received; your date or order is confirmed personally after availability, your quote, and the required payment are arranged.", "Recibimos tu solicitud; confirmaremos personalmente tu fecha o pedido después de acordar la disponibilidad, la cotización y el pago requerido.")}</p></>}
           {(status === "draft" || status === "error") && localizedPrepared && <><Mail size={27} strokeWidth={1} /><h3>{status === "draft" ? t("One last little step.", "Un último pasito.") : t("Let’s send it another way.", "Enviémoslo de otra manera.")}</h3><p>{status === "draft" ? t("Your inquiry is ready, but hasn’t been sent yet. Open your email draft below and press send.", "Tu consulta está lista, pero aún no se ha enviado. Abre el borrador abajo y presiona enviar.") : t("We couldn’t confirm your submission. Your details are still here. You can retry or send the prepared email instead.", "No pudimos confirmar el envío. Tus detalles siguen aquí. Puedes intentar otra vez o enviar el correo preparado.")}</p><div className="sol-actions"><a className="sol-button" href={inquiryMailto(localizedPrepared)}>{t("Open email draft", "Abrir borrador")}<ArrowRight size={16} /></a><button type="button" className="sol-text-link" onClick={copyInquiry}><Copy size={15} />{copied ? t("Copied", "Copiado") : t("Copy inquiry", "Copiar consulta")}</button></div><p className="sol-small-note">{t("Send to ", "Envía a ")}<a href={"mailto:" + contactEmail}>{contactEmail}</a>. {t("We reply within 2–3 business days.", "Respondemos dentro de 2–3 días hábiles.")}</p><details><summary>{t("View your prepared inquiry", "Ver tu consulta preparada")}</summary><textarea aria-label={t("Prepared inquiry", "Consulta preparada")} readOnly rows={10} value={inquiryMessage(localizedPrepared).text} /></details></>}
         </div>
 

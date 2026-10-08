@@ -42,7 +42,7 @@
 .drawerLinks { border-top: 1px solid var(--border); }
 .drawerLinks a { display: grid; grid-template-columns: 23px 1fr 17px; align-items: center; gap: 12px; min-height: 69px; padding-block: 10px; border-bottom: 1px solid var(--border); transition: color 180ms, padding 180ms; }
 .drawerLinks strong { display: block; font-family: var(--font-display); font-size: 25px; line-height: 1.1; font-weight: 500; }
-.drawerLinks small { display: block; margin-top: 5px; font-size: 11px; line-height: 1.4; color: var(--muted-foreground); }
+.drawerLinks small { display: block; margin-top: 5px; font-size: 12px; line-height: 1.4; color: var(--muted-foreground); }
 .linkIcon { color: var(--sage); }
 .linkArrow { color: var(--sage); opacity: .7; }
 .drawerLinks a[aria-current="page"], .drawerLinks a:hover { color: var(--accent-foreground); }
@@ -54,7 +54,6 @@
 .bookingLink svg:last-child { margin-left: auto; }
 .contactLinks { display: flex; align-items: center; justify-content: center; gap: 21px; margin-top: 11px; }
 .contactLinks a { display: flex; align-items: center; gap: 7px; min-height: 44px; font-size: 12px; }
-.contactLinks > span { width: 1px; height: 14px; background: var(--border); }
 .drawer a:focus-visible, .drawer button:focus-visible, .menuButton:focus-visible, .actionBar a:focus-visible { outline: 2px solid var(--accent-foreground); outline-offset: 4px; }
 @media (max-width: 767px) {
   .menuButton { display: flex; align-items: center; gap: 10px; min-height: 44px; border: 1px solid var(--border); border-radius: 30px; padding: 9px 14px; color: var(--foreground); cursor: pointer; }
@@ -72,7 +71,7 @@
 @media (max-width: 360px) {
   .drawer { padding-inline: 20px; }
   .drawerLinks a { gap: 9px; }
-  .drawerLinks small { font-size: 10px; }
+  .drawerLinks small { font-size: 12px; }
   .welcome p { font-size: 25px; }
   .actionBar { padding-inline: 10px; grid-template-columns: minmax(0, 1fr) 88px; }
 }

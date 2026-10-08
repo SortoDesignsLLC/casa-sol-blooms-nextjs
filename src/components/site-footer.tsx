@@ -1,6 +1,6 @@
 import { getTranslations } from "@/lib/i18n/server";
 import Link from "@/components/site-link";
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 const logo = "/images/casa-sol-logo-transparent.png";
 
 export async function SiteFooter() {
@@ -21,12 +21,6 @@ export async function SiteFooter() {
         <p className="mt-3 text-sm text-muted-foreground" lang="es">{t("Se habla español. Un poquito de sol para todos.")}</p>
 
         <div className="mt-6 flex flex-col items-center gap-3 text-sm text-muted-foreground sm:flex-row sm:justify-center sm:gap-8">
-          <a
-            href="tel:3018353714"
-            className="inline-flex items-center gap-2 transition-colors hover:text-primary"
-          >
-            <Phone size={15} className="text-primary" /> 301-835-3714
-          </a>
           <a
             href="mailto:casasolmatchacoffee@gmail.com"
             className="inline-flex items-center gap-2 break-all transition-colors hover:text-primary"

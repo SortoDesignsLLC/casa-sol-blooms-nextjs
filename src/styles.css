@@ -267,7 +267,7 @@ nav a[aria-current="page"] { color: var(--primary); }
 /* Casa Sol: open editorial compositions, drawn from the sun in our mark. */
 .casa-home { overflow: clip; background: var(--surface-cream); }
 .sol-wrap { width: min(1200px, calc(100% - 112px)); margin-inline: auto; }
-.sol-label { font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; line-height: 1.7; }
+.sol-label { font-size: 12px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; line-height: 1.7; }
 .casa-home h2 { font-size: clamp(40px, 4.4vw, 66px); font-weight: 500; line-height: 1.02; letter-spacing: -.035em; }
 .casa-home h2 em { font-weight: 400; }
 .sol-hero { min-height: 680px; position: relative; display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; padding: 45px max(56px, calc((100vw - 1200px) / 2)) 80px; gap: 50px; }
@@ -281,21 +281,21 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-text-link { display: inline-flex; align-items: center; gap: 16px; font-size: 12px; padding-block: 9px; border-bottom: 1px solid currentColor; }
 .sol-text-link svg { transition: transform 250ms; }
 .sol-text-link:hover svg { transform: translateX(5px); }
-.sol-location { margin-top: 32px; font-size: 10px; letter-spacing: .06em; color: var(--muted-foreground); }
+.sol-location { margin-top: 32px; font-size: 12px; letter-spacing: .06em; color: var(--muted-foreground); }
 .sol-hero-art { position: relative; padding: 18px 18px 0; animation: sol-arrive 1200ms 100ms both; }
 .sol-hero-photo { height: 525px; overflow: hidden; border-radius: 50% 50% 2px 2px; position: relative; }
 .sol-hero-photo img { width: 100%; height: 100%; object-fit: cover; }
 .sol-orbit { position: absolute; inset: 0 0 34px; border: 1px solid var(--sage); border-radius: 50% 50% 0 0; opacity: .4; transform: rotate(5deg); }
 .sol-hero-sun { width: 112px; position: absolute; top: 0; left: -36px; color: var(--sage); background: var(--surface-cream); border-radius: 50%; }
 .sol-photo-note { display: block; text-align: right; padding-top: 15px; font-family: var(--font-display); font-style: italic; font-size: 18px; }
-.sol-scroll { position: absolute; bottom: 25px; left: max(56px, calc((100vw - 1200px) / 2)); display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .09em; }
+.sol-scroll { position: absolute; bottom: 25px; left: max(56px, calc((100vw - 1200px) / 2)); display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .09em; }
 .sol-gather { padding-block: 100px 110px; border-top: 1px solid var(--border); }
 .sol-gather-heading { display: flex; justify-content: space-between; align-items: start; gap: 40px; margin-bottom: 48px; }
 .sol-gather-heading .sol-label { max-width: 180px; padding-top: 9px; }
 .sol-gather-heading h2 { width: 66%; }
 .sol-gather-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: 10%; align-items: start; }
 .sol-wide-photo img { width: 100%; height: 600px; object-fit: cover; object-position: center 48%; }
-.casa-home figcaption { font-size: 10px; letter-spacing: .05em; margin-top: 14px; }
+.casa-home figcaption { font-size: 12px; letter-spacing: .05em; margin-top: 14px; }
 .sol-gather-aside > p { max-width: 285px; margin: 14px 0 55px; font-size: 17px; line-height: 1.7; }
 .sol-gather-aside img { width: 100%; height: 385px; object-fit: cover; border-radius: 160px 160px 0 0; }
 .sol-menu { background: var(--sage-soft); padding-block: 90px; }
@@ -309,14 +309,14 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-drink { padding-top: 22px; }
 .sol-drink h4 { font-family: var(--font-display); font-size: 30px; line-height: 1.1; }
 .sol-drink p { font-size: 12px; margin-top: 6px; line-height: 1.6; max-width: 340px; }
-.sol-menu-note { font-size: 10px; margin-top: 24px; font-style: italic; }
+.sol-menu-note { font-size: 12px; margin-top: 24px; font-style: italic; }
 .sol-events { display: grid; grid-template-columns: .95fr 1fr; gap: 10%; align-items: center; padding-block: 120px; }
 .sol-cart-photo img { width: 100%; height: 620px; object-fit: cover; border-radius: 240px 240px 0 0; }
 .sol-events h2 { margin-top: 20px; }
 .sol-events-copy > p:not(.sol-label) { font-size: 14px; line-height: 1.8; margin-top: 25px; max-width: 330px; }
 .sol-event-list { margin-block: 20px; }
 .sol-event-list li { display: flex; gap: 24px; padding-block: 22px; border-bottom: 1px solid var(--border); }
-.sol-event-list li > span { font-size: 10px; padding-top: 7px; }
+.sol-event-list li > span { font-size: 12px; padding-top: 7px; }
 .sol-event-list h3 { font-size: 26px; font-weight: 500; }
 .sol-event-list p { font-size: 12px; margin-top: 5px; }
 .sol-story { padding-block: 70px 90px; background: var(--blush-soft); }
@@ -341,7 +341,7 @@ nav a[aria-current="page"] { color: var(--primary); }
 .sol-finale { position: relative; text-align: center; padding: 70px 24px 90px; background: var(--sand); border-radius: 50% 50% 0 0 / 90px 90px 0 0; }
 .sol-finale-sun { width: 65px; margin: 0 auto 25px; }
 .sol-finale h2 { margin: 25px 0 30px; font-size: clamp(45px, 5.5vw, 80px); }
-.sol-finale-note { font-size: 10px; margin-top: 25px; }
+.sol-finale-note { font-size: 12px; margin-top: 25px; }
 .casa-home a:focus-visible, .casa-home summary:focus-visible { outline: 2px solid var(--foreground); outline-offset: 6px; }
 @keyframes sol-arrive { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 1100px) {
@@ -360,12 +360,12 @@ nav a[aria-current="page"] { color: var(--primary); }
   .sol-hero { min-height: auto; grid-template-columns: 1fr; padding: 36px 24px 55px; gap: 32px; }
   .sol-hero h1 { font-size: 95px; margin-top: 16px; }
   .sol-hero h1 span { font-size: 36px; margin-top: 17px; }
-  .sol-label { font-size: 9px; letter-spacing: .13em; }
+  .sol-label { font-size: 11px; letter-spacing: .13em; }
   .sol-intro { font-size: 13px; margin-top: 18px; max-width: 320px; }
   .sol-actions { gap: 17px; margin-top: 21px; }
-  .sol-button { padding: 15px 20px; font-size: 11px; gap: 12px; }
-  .sol-text-link { font-size: 11px; }
-  .sol-location { margin-top: 21px; font-size: 9px; }
+  .sol-button { padding: 15px 20px; font-size: 12px; gap: 12px; }
+  .sol-text-link { font-size: 12px; }
+  .sol-location { margin-top: 21px; font-size: 11px; }
   .sol-hero-art { width: 86%; margin-left: auto; padding: 12px 12px 0; }
   .sol-hero-photo { height: 335px; }
   .sol-hero-sun { width: 78px; left: -25px; }
@@ -380,7 +380,7 @@ nav a[aria-current="page"] { color: var(--primary); }
   .sol-gather-aside { display: grid; grid-template-columns: .8fr 1fr; gap: 20px; align-items: center; }
   .sol-gather-aside > p { font-size: 13px; margin: 0; }
   .sol-gather-aside img { height: 240px; }
-  .casa-home figcaption { font-size: 9px; line-height: 1.6; }
+  .casa-home figcaption { font-size: 11px; line-height: 1.6; }
   .sol-menu { padding-block: 60px; }
   .sol-menu-grid { grid-template-columns: 1fr; gap: 40px; }
   .sol-menu-title { position: relative; top: auto; }
@@ -483,7 +483,7 @@ nav a[aria-current="page"] { color: var(--primary); }
   .sol-finale > .sol-background .sol-margin-sun { display: none; }
 }
 .sol-motion-control { padding: 18px; background: var(--sand); text-align: center; }
-.sol-motion-control button { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; padding: 9px 14px; border: 1px solid var(--border); border-radius: 30px; cursor: pointer; }
+.sol-motion-control button { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; padding: 9px 14px; border: 1px solid var(--border); border-radius: 30px; cursor: pointer; }
 .casa-home[data-motion-paused="true"] *, .casa-home[data-motion-paused="true"] *::before { animation-play-state: paused !important; }
 @keyframes sol-sun-turn { to { transform: rotate(360deg); } }
 @keyframes sol-sway { from { transform: rotate(-4deg); } to { transform: rotate(5deg); } }

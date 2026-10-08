@@ -37,7 +37,7 @@
 .home .heroNote { position: relative; margin-top: 15px; padding-left: 20%; text-align: center; font-size: 31px; transform: rotate(-6deg); }
 .heroNote span { margin-left: 7px; }
 .heroBotanical { position: absolute; z-index: -1; right: -90px; bottom: 0; width: 340px; height: auto; opacity: .65; transform: rotate(-15deg); pointer-events: none; }
-.heroFootnote { position: absolute; bottom: 25px; left: max(56px, calc((100vw - 1200px) / 2)); color: var(--sage); font-size: 11px; letter-spacing: .06em; }
+.heroFootnote { position: absolute; bottom: 25px; left: max(56px, calc((100vw - 1200px) / 2)); color: var(--sage); font-size: 12px; letter-spacing: .06em; }
 .introduction { display: grid; grid-template-columns: .8fr 1fr; align-items: center; gap: 11%; max-width: 940px; padding-block: var(--home-space); }
 .founderPhoto { width: 100%; max-width: 290px; justify-self: center; position: relative; }
 .founderPhoto::before { content: ""; position: absolute; inset: 12px -13px 48px 12px; border: 1px solid var(--blush); border-radius: 48% 48% 12px 12px; transform: rotate(4deg); z-index: 0; opacity: .65; }

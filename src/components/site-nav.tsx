@@ -4,7 +4,7 @@ import { LanguageToggle } from "./language-toggle";
 import { usePathname } from "next/navigation";
 import Link from "@/components/site-link";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, Heart, ArrowUpRight, ArrowRight, CalendarDays, Coffee, House, Truck, Flower2, Phone, Mail } from "lucide-react";
+import { Menu, X, Heart, ArrowUpRight, ArrowRight, CalendarDays, Coffee, House, Truck, Flower2, Mail } from "lucide-react";
 import { BotanicalBranch } from "@/components/sol-illustrations";
 import styles from "./site-nav.module.css";
 const logo = "/images/casa-sol-logo-transparent.png";
@@ -37,7 +37,7 @@ function MobileQuickActions({ pathname }: { pathname: string }) {
 
   return <nav aria-label={t("Quick actions")} className={styles.actionBar}>
     <Link href="/book" className={styles.actionPrimary}><CalendarDays size={19} strokeWidth={1.6} aria-hidden="true" /><span>{t("Plan your event")}</span><ArrowRight size={17} aria-hidden="true" /></Link>
-    <a href="tel:3018353714" className={styles.actionSecondary}><Phone size={18} strokeWidth={1.6} aria-hidden="true" /><span>{t("Call us")}</span></a>
+    <a href="mailto:casasolmatchacoffee@gmail.com" className={styles.actionSecondary}><Mail size={18} strokeWidth={1.6} aria-hidden="true" /><span>{t("Email", "Correo")}</span></a>
   </nav>;
 }
 
@@ -120,8 +120,6 @@ export function SiteNav() {
         <p className={styles.invitation}>{t("Something worth celebrating?")}</p>
         <Link href="/book" onClick={closeDrawer} className={styles.bookingLink}><CalendarDays size={18} aria-hidden="true" />{t(" Plan your event ")}<ArrowRight size={18} aria-hidden="true" /></Link>
         <div className={styles.contactLinks}>
-          <a href="tel:3018353714"><Phone size={15} aria-hidden="true" />{t("Call us")}</a>
-          <span aria-hidden="true" />
           <a href="mailto:casasolmatchacoffee@gmail.com"><Mail size={15} aria-hidden="true" />{t("Say hello")}</a>
         </div>
       </div>
